@@ -1,0 +1,70 @@
+<?php 
+	$pagename = basename($_SERVER['REQUEST_URI']);
+?>
+<aside>
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a class="active" href="index.php" <?php if($pagename=='index.php') echo 'style="background:black !important;"'; ?>>
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+				<li>
+                    <a class="active" href="manage_orders.php" <?php if($pagename=='manage_orders.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-tasks"></i>
+                        <span>Manage orders</span>
+                    </a>
+                </li>
+				<li>
+                    <a class="active" href="admin_email.php" <?php if($pagename=='admin_email.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-envelope"></i>
+                        <span>Manage Email Setting</span>
+                    </a>
+                </li>
+				<li>
+                    <a class="active" href="admin_user.php" <?php if($pagename=='admin_user.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-users"></i>
+                        <span>Manage Admin User</span>
+                    </a>
+                </li>
+				<li>
+                    <a class="active" href="admin_result.php" <?php if($pagename=='admin_result.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-bolt"></i>
+                        <span>Manage Result</span>
+                    </a>
+                </li>
+				<li>
+                    <a class="active" href="admin_stripe.php" <?php if($pagename=='admin_stripe.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-key"></i>
+                        <span>Manage Payment Settings</span>
+                    </a>
+                </li>
+				<li>
+                    <a href="settings.php" <?php if($pagename=='settings.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-cog"></i>
+                        <span>Settings </span>
+                    </a>
+                </li>
+				<li>
+                    <a href="logout.php">
+                        <i class="fas fa-key"></i>
+                        <span>Log Out</span>
+                    </a>
+                </li>
+            </ul>            
+		</div>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<script>
+setTimeout(function(){
+	$('#ascrail2000 > div').css({
+		'width':'10px',
+		'background':'rgb(73,180,212)'
+	});
+},2000);
+	
+</script>
