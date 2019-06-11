@@ -22,12 +22,66 @@
 		min-height: 15rem;
 		padding: 1.5rem;
 		width: 15rem;
+		border-bottom: #3f99ef 8px solid;
 	}
 
 	.card .header{
-		font-size: 1.5rem;
+		font-size: 1.1rem;
 		font-weight: bold;
-		color: #3ABEFF;
+		color: #3f99ef;
+		padding: 1rem;
+	}
+
+	.card .price {
+		color: #839bb0;
+		font-size: 1rem;
+		font-weight: bold;
+	}
+
+	.card .options {
+		padding: 1rem;
+	}
+
+	.card .options li{
+			text-align: left;
+		}
+	.card .options li[class=active] i{
+		color:#3f99ef;
+	}
+
+
+	.card .options li[class=inactive] i{
+		color: #839bb0;
+	}
+
+	/*.card .options li[class=active] span{
+		font-weight: bold;
+		margin-left: 1px;
+	}
+
+	.card .options li[class=inactive] span{
+		color: #d3dce7;
+		margin-left: 1px;
+	}*/
+
+	.text-active-bold {
+		color: #3a769b;
+		font-weight: bold;
+	}
+
+	.text-active {
+		color: #93a3bd;
+	}
+
+	.text-inactive {
+		color: #d3dce7;
+	}
+
+	.card .btn-action{
+		border: #3f99ef 1px solid;
+		color: #3f99ef;
+		font-weight: bold;
+		background-color: #ecf8ff; 
 	}
    </style>
 </head>
@@ -75,7 +129,7 @@
         <section class="ptb--120" style="padding:90px 0 !important">
 			<form action="operations.php" method="POST">
 				<input type="hidden" name="order_id" value="<?php echo $order_id?>">
-				<div class="row">
+				<!-- <div class="row">
 					
 
 					<div class="col-sm-3"></div>
@@ -92,25 +146,74 @@
 					  <b>Upload</b></center>
 					</div>
 
-				</div>
+				</div> -->
 
 				<div class="row">
-					<div class="col-md-12" style="text-align: center;">
-						<div class="col-sm-2 col-sm-offset-2">
-							<div class="card">
-								<div class="header">
-									Price 1
+					<div class="col-md-12">
+						<div class="col-sm-2 col-sm-offset-2" onclick="test('instant', 1)">
+							<div class="card service instant">
+								<div class="header text-center">
+									Instant Name
+								</div>
+								<div class="price text-center">
+									$ 8.88
+								</div>
+
+								<div class="options">
+									<ul>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active-bold">Personalize 3 Name</span></li>
+										<li class="inactive"><i class="fa fa-check"></i><span class="text-inactive">Professional Review</span></li>
+										<li class="inactive"><i class="fa fa-check"></i><span class="text-inactive">Digital Certificate</span></li>
+									</ul>
+								</div>
+
+								<div class="text-center">
+									<button class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-2 col-sm-offset-1">
-							<div class="card">
-								Price 2
+						<div class="col-sm-2 col-sm-offset-1" onclick="test('custom', 2)">
+							<div class="card service custom">
+								<div class="header text-center">
+									Custom Name
+								</div>
+								<div class="price text-center">
+									$ 28.88
+								</div>
+
+								<div class="options">
+									<ul>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active-bold">Personalize 1 Name</span></li>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active">Professional Review</span></li>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active">Digital Certificate</span></li>
+									</ul>
+								</div>
+
+								<div class="text-center">
+									<button class="btn btn-default btn-action">Purchase Now</button>
+								</div>
 							</div>
 						</div>
-						<div class="col-sm-2 col-sm-offset-1">
-							<div class="card">
-								Price 3
+						<div class="col-sm-2 col-sm-offset-1" onclick="test('upload', 3)">
+							<div class="card service upload">
+								<div class="header text-center">
+									Upload Name
+								</div>
+								<div class="price text-center">
+									$ 58.8
+								</div>
+
+								<div class="options">
+									<ul>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active-bold">Personalize 1 Name</span></li>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active">Professional Review</span></li>
+										<li class="active"><i class="fa fa-check"></i><span class="text-active">Digital Certificate</span></li>
+									</ul>
+								</div>
+
+								<div class="text-center">
+									<button class="btn btn-default btn-action">Purchase Now</button>
+								</div>
 							</div>
 						</div>
 					</div>
