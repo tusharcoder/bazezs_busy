@@ -16,6 +16,19 @@
 	.pt--120 {
 		padding-top: 90px 0 !important;
 	}
+
+	.card {
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		min-height: 15rem;
+		padding: 1.5rem;
+		width: 15rem;
+	}
+
+	.card .header{
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: #3ABEFF;
+	}
    </style>
 </head>
 
@@ -63,6 +76,8 @@
 			<form action="operations.php" method="POST">
 				<input type="hidden" name="order_id" value="<?php echo $order_id?>">
 				<div class="row">
+					
+
 					<div class="col-sm-3"></div>
 					<div class="col-sm-2" style="">
 					  <center><img src="icons/service-type/instant.png" class="service instant" onclick="test('instant', 1)" alt="Instant" id="build" style="width:170px;border-radius:50% !important"><br><br>
@@ -76,7 +91,31 @@
 					  <center><img src="icons/service-type/upload.png" alt="Upload" class="service upload" onclick="test('upload', 3)" style="width:170px;border-radius:50% !important"><br><br>
 					  <b>Upload</b></center>
 					</div>
-				</div><br>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12" style="text-align: center;">
+						<div class="col-sm-2 col-sm-offset-2">
+							<div class="card">
+								<div class="header">
+									Price 1
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-2 col-sm-offset-1">
+							<div class="card">
+								Price 2
+							</div>
+						</div>
+						<div class="col-sm-2 col-sm-offset-1">
+							<div class="card">
+								Price 3
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
 				<center><input type="hidden" name="order_service_id" id="service_select">
 				<button type="submit" name="add_order_service_id" id="btn" class="btn btn-success btn-lg" disabled>Next</button></center>
 			</form>
