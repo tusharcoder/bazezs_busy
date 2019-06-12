@@ -193,7 +193,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-sm-2 col-sm-offset-2" onclick="test('instant', 1)">
+						<div class="col-md-2 col-md-offset-2" onclick="test('instant', 1)">
 							<div class="card service instant">
 								<div class="card-badge">
 									Best Seller
@@ -218,7 +218,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-2 col-sm-offset-1" onclick="test('custom', 2)">
+						<div class="col-md-2 col-md-offset-1" onclick="test('custom', 2)">
 							<div class="card service custom">
 								<div class="header text-center">
 									Custom Name
@@ -240,7 +240,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-2 col-sm-offset-1" onclick="test('upload', 3)">
+						<div class="col-md-2 col-md-offset-1" onclick="test('upload', 3)">
 							<div class="card service upload">
 								<div class="header text-center">
 									Upload Name
