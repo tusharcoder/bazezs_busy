@@ -83,6 +83,46 @@
 		font-weight: bold;
 		background-color: #ecf8ff; 
 	}
+
+	.card-badge{
+		position: absolute;
+		width: 6rem;
+		height: 2rem;
+		right: -30px; 
+		top: 6px;
+		background-color: #e875c6;
+		padding: 10px;
+		line-height: 10px;
+		text-align: center;
+		color: white;
+		font-weight: bold;
+	}
+
+	.card-badge:after {
+		content:"";
+  		position: absolute;
+  		top: -3px;
+  		transform: skewY(30deg);
+  		right:0px;
+  		width:10px;
+  		height:inherit;
+  		background-color:#e875c6;
+	}
+
+	.card-badge:before {
+	  content: "";  
+	  position: absolute;  
+	  display: block;  
+	  bottom: 0em;  
+	  border: 1rem solid #e875c6; 
+	  } 
+
+	 .card-badge:before {  
+	 	left: -2em;  
+	 	border-right-width: 1.5em;  
+	 	border-left-color: transparent; 
+	 }
+
    </style>
 </head>
 
@@ -152,6 +192,9 @@
 					<div class="col-md-12">
 						<div class="col-sm-2 col-sm-offset-2" onclick="test('instant', 1)">
 							<div class="card service instant">
+								<div class="card-badge">
+									Best Seller
+								</div>
 								<div class="header text-center">
 									Instant Name
 								</div>
