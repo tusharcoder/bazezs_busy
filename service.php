@@ -55,16 +55,6 @@
 		color: #839bb0;
 	}
 
-	/*.card .options li[class=active] span{
-		font-weight: bold;
-		margin-left: 1px;
-	}
-
-	.card .options li[class=inactive] span{
-		color: #d3dce7;
-		margin-left: 1px;
-	}*/
-
 	.text-active-bold {
 		color: #3a769b;
 		font-weight: bold;
@@ -125,6 +115,17 @@
 	 	border-left-color: transparent; 
 	 }
 
+	 .card {
+  transition: transform .5s;
+}
+
+	.card:hover{
+		transform: scale3d(1.006, 1.006, 1);
+		 box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+		&::after {
+      opacity: 1;
+    }
+	}
    </style>
 </head>
 
