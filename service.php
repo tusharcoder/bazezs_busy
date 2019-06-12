@@ -23,6 +23,7 @@
 		padding: 1.5rem;
 		width: 15rem;
 		border-bottom: #3f99ef 8px solid;
+		position: relative;
 	}
 
 	.card .header{
@@ -88,7 +89,7 @@
 		position: absolute;
 		width: 6rem;
 		height: 2rem;
-		right: -30px; 
+		right: -10px; 
 		top: 6px;
 		background-color: #e875c6;
 		padding: 10px;
@@ -96,6 +97,7 @@
 		text-align: center;
 		color: white;
 		font-weight: bold;
+		font-size: 80%;
 	}
 
 	.card-badge:after {
