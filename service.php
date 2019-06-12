@@ -168,7 +168,7 @@
 								</div>
 
 								<div class="text-center">
-									<button class="btn btn-default btn-action">Purchase Now</button>
+									<button type="submit" class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
@@ -190,7 +190,7 @@
 								</div>
 
 								<div class="text-center">
-									<button class="btn btn-default btn-action">Purchase Now</button>
+									<button type="submit" class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
@@ -212,7 +212,7 @@
 								</div>
 
 								<div class="text-center">
-									<button class="btn btn-default btn-action">Purchase Now</button>
+									<button type="submit" class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
@@ -220,7 +220,7 @@
 				</div>
 				<br>
 				<center><input type="hidden" name="order_service_id" id="service_select">
-				<button type="submit" name="add_order_service_id" id="btn" class="btn btn-success btn-lg" disabled>Next</button></center>
+				<!-- <button type="submit" name="add_order_service_id" id="btn" class="btn btn-success btn-lg" disabled>Next</button></center> -->
 			</form>
         </section>
     </div>
