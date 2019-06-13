@@ -17,11 +17,16 @@
 		padding-top: 90px 0 !important;
 	}
 
+	.card-parent{
+
+		column-gap: 2.5rem !important;
+	}
+
 	.card {
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 		min-height: 15rem;
 		padding: 1.5rem;
-		/*min-width: 10rem;*/
+		/*max-width: 20rem;*/
 		border-bottom: #3f99ef 8px solid;
 		position: relative;
 		margin-bottom: 4rem;
@@ -193,7 +198,7 @@
 				</div> -->
 
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" onclick="test('instant', 1)">
 							<div class="card service instant">
 								<div class="card-badge">
