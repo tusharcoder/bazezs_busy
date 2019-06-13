@@ -21,9 +21,10 @@
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 		min-height: 15rem;
 		padding: 1.5rem;
-		width: 15rem;
+		/*min-width: 10rem;*/
 		border-bottom: #3f99ef 8px solid;
 		position: relative;
+		margin-bottom: 4rem;
 	}
 
 	.card .header{
@@ -193,7 +194,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-2 col-md-offset-2" onclick="test('instant', 1)">
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" onclick="test('instant', 1)">
 							<div class="card service instant">
 								<div class="card-badge">
 									Best Seller
@@ -218,7 +219,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2 col-md-offset-1" onclick="test('custom', 2)">
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" onclick="test('custom', 2)">
 							<div class="card service custom">
 								<div class="header text-center">
 									Custom Name
@@ -240,7 +241,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2 col-md-offset-1" onclick="test('upload', 3)">
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" onclick="test('upload', 3)">
 							<div class="card service upload">
 								<div class="header text-center">
 									Upload Name
