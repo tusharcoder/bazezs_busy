@@ -7,6 +7,7 @@
 		header("location:index.php");
 		exit();
 	}
+		include "database.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -196,7 +197,35 @@
 					</div>
 
 				</div> -->
+				<?php 
+				/* script to get the prices of the service from the backend */
+				$query = "SELECT * FROM services where service_name = 'upload'";
+$result = mysqli_query($con, $query) or die(mysqli_error($con));
+$row = mysqli_fetch_array($result);
+if ($row){
+	$upload_price = $row["service_price"];
+}else{
+	$upload_price = 0;
+}
 
+$query = "SELECT * FROM services where service_name = 'custom'";
+$result = mysqli_query($con, $query) or die(mysqli_error($con));
+$row = mysqli_fetch_array($result);
+if ($row){
+	$custom_price = $row["service_price"];
+}else{
+	$custom_price = 0;
+}
+
+$query = "SELECT * FROM services where service_name = 'instant'";
+$result = mysqli_query($con, $query) or die(mysqli_error($con));
+$row = mysqli_fetch_array($result);
+if ($row){
+	$instant_price = $row["service_price"];
+}else{
+	$instant_price = 0;
+}
+				?>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" onclick="test('instant', 1)">
@@ -208,7 +237,7 @@
 									Instant Name
 								</div>
 								<div class="price text-center">
-									$ 8.88
+									$ <?php echo($instant_price); ?>
 								</div>
 
 								<div class="options">
@@ -230,7 +259,7 @@
 									Custom Name
 								</div>
 								<div class="price text-center">
-									$ 28.88
+									$ <?php echo($custom_price); ?>
 								</div>
 
 								<div class="options">
@@ -252,7 +281,7 @@
 									Upload Name
 								</div>
 								<div class="price text-center">
-									$ 58.8
+									$ <?php echo($upload_price); ?>
 								</div>
 
 								<div class="options">
