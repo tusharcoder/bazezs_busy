@@ -12,6 +12,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a class="active" href="service.php" <?php if($pagename=='service.php') echo 'style="background:black !important;"'; ?>>
+                        <i class="fas fa-handshake"></i>
+                        <span>Manage Service Prices</span>
+                    </a>
+                </li>
 				<li>
                     <a class="active" href="manage_orders.php" <?php if($pagename=='manage_orders.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
                         <i class="fas fa-tasks"></i>

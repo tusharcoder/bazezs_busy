@@ -148,7 +148,23 @@
 		header("location:admin_result.php");
 		exit();
 	}
-	
+
+	//Edit the service prices
+	if(isset($_POST['update_services'])){
+		$services = array('upload'=> $_POST['upload'],
+		'custom'=> $_POST['custom'],
+		'instant'=> $_POST['instant']);
+		foreach($services as $key => $value){
+			if(mysqli_query($con, "UPDATE services SET service_price='$value' WHERE service_name='$key'")){
+				continue;
+			}
+			else{
+				echo(mysqli_error($con));
+			}
+	}	
+	header("location:service.php");
+	exit();
+}
 	
 ?>
 
