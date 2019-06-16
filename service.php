@@ -249,7 +249,7 @@ if ($row){
 								</div>
 
 								<div class="text-center">
-									<button type="submit" class="btn btn-default btn-action">Purchase Now</button>
+									<button type="submit" name="add_order_service_id" value="1" class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
@@ -271,7 +271,7 @@ if ($row){
 								</div>
 
 								<div class="text-center">
-									<button type="submit" class="btn btn-default btn-action">Purchase Now</button>
+									<button type="submit" name="add_order_service_id" value="2" class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
@@ -293,7 +293,7 @@ if ($row){
 								</div>
 
 								<div class="text-center">
-									<button type="submit" class="btn btn-default btn-action">Purchase Now</button>
+									<button type="submit" name="add_order_service_id" value="3" class="btn btn-default btn-action">Purchase Now</button>
 								</div>
 							</div>
 						</div>
