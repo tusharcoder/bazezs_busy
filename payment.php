@@ -108,23 +108,28 @@
 										<img src="icons/index-page/orc.png" class="img-responsive" width="60px" style="display: inline-block"> 
 									<?php } ?>
 										<?php 
-											if ($order_service_id==1){
-												echo 'Instant Order';
-											} else if($order_service_id==2){
-												echo 'Custom Order';
-											}  else if($order_service_id==3){
-												echo 'Upload Order';
-											} 
+											if ($order_service_id){
+												$q = "Select * from services where id='$order_service_id'";
+												$result = mysqli_query($con, $q);
+												if ($row = mysqli_fetch_array($result)){
+													$price = $row['service_price'];
+													$service_name = $row['service_name'];
+												}else{
+													    throw new Exception("No service selected or selected service not available, try again later");
+
+												}
+												}
 										?>
+										<?php echo strtoupper($service_name)." ORDER"; ?> 
 									</td>
 									<td>
-										<p style="margin-top:20px;float:right">$100.00</p>
+										<p style="margin-top:20px;float:right">$<?php echo($price); ?></p>
 									</td>
 								</tr>
 							</table><hr/>
 							<table class="table">
 								<tr>
-									<td style="float:right">Total: $100.00</td>
+									<td style="float:right">Total: $<?php echo($price); ?></td>
 								</tr>
 							</table>
 						</div>
@@ -159,7 +164,7 @@
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
-								data-amount="<?php echo 100 * 100; ?>"
+								data-amount="<?php echo(100*$price);?>"
 								data-name="UNIQLO"
 								data-description="Pay Now"
 								data-image="images/logo/uniqlo.png"

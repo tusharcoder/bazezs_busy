@@ -18,9 +18,8 @@
 	// add Order Service
 	
 	if(isset($_POST['add_order_service_id'])){
-		//print_r($_POST); exit();
 		$order_id = $_POST['order_id'];
-		$order_service_id = $_POST['order_service_id'];
+		$order_service_id = $_POST['add_order_service_id'];
 		mysqli_query($con, "UPDATE orders SET order_service_id=$order_service_id WHERE order_id='$order_id'");
 		header("location:personality.php");
 		exit();
