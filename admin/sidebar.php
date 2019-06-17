@@ -18,6 +18,12 @@
                         <span>Manage Service Prices</span>
                     </a>
                 </li>
+                <li>
+                    <a class="active" href="promotional_codes.php" <?php if($pagename=='promotional_codes.php') echo 'style="background:black !important;"'; ?>>
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Manage Promotional codes</span>
+                    </a>
+                </li>
 				<li>
                     <a class="active" href="manage_orders.php" <?php if($pagename=='manage_orders.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
                         <i class="fas fa-tasks"></i>

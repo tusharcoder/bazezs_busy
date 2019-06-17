@@ -159,12 +159,30 @@
 				continue;
 			}
 			else{
-				echo(mysqli_error($con));
+				echo("Some error occurred while updating the prices");
 			}
 	}	
 	header("location:service.php");
 	exit();
 }
+
+
+	// update the promotional codes
+	if (isset($_POST['update_promotional_codes'])) {
+		# updated the promotional codes
+		$promotional_code = $_POST["promotional_code"];
+		$value = $_POST['value'];
+		$type = $_POST['type'];
+
+		$q = "insert into promotional_code (promotional_code, value, type) values ('$promotional_code', $value, '$type')"; # need to create the table in the database.
+		if(mysqli_query($con, $q)){
+			header("location:promotional_codes.php");
+		}else{
+			throw new exception("promotional codes not updated. Some error occurred. Try again.");
+		};
+
+
+	}
 	
 ?>
 
