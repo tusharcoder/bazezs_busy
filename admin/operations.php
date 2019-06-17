@@ -174,11 +174,16 @@
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 
+		if(isset($_POST["id"]) && $_POST['id']!=""){
+		$q = "UPDATE promotional_code SET promotional_code='$promotional_code', value='$value', type='$type' WHERE id=".$_POST["id"].";"; # need to create the table in the database.
+	}else{
 		$q = "insert into promotional_code (promotional_code, value, type) values ('$promotional_code', $value, '$type')"; # need to create the table in the database.
+	}
 		if(mysqli_query($con, $q)){
 			header("location:promotional_codes.php");
 		}else{
-			throw new exception("promotional codes not updated. Some error occurred. Try again.");
+			var_dump($q);
+			throw new exception(mysqli_error($con));
 		};
 
 
