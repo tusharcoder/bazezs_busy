@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php session_start();
+error_reporting(E_ALL);
+
+?>
 <?php
 	include "database.php";
 	// update setting
@@ -166,18 +169,32 @@
 	exit();
 }
 
-
-	// update the promotional codes
+	// add new promotional codes
 	if (isset($_POST['update_promotional_codes'])) {
 		# updated the promotional codes
 		$promotional_code = $_POST["promotional_code"];
 		$value = $_POST['value'];
 		$type = $_POST['type'];
+		$q="insert into promotional_code (promotional_code, value, type) values ('$promotional_code', $value, '$type')";
+		if(mysqli_query($con, $q)){
+			header("location:promotional_codes.php");
+		}else{
+			var_dump($q);
+			throw new exception(mysqli_error($con));
+		};
 
-		if(isset($_POST["id"]) && $_POST['id']!=""){
+
+	}
+
+
+	// edit the promotional codes
+	if (isset($_POST['edit_code'])) {
+		# updated the promotional codes
+		$promotional_code = $_POST["promotional_code"];
+		$value = $_POST['value'];
+		$type = $_POST['type'];
+		if(isset($_POST["id"])&& $_POST['id']!=""){
 		$q = "UPDATE promotional_code SET promotional_code='$promotional_code', value='$value', type='$type' WHERE id=".$_POST["id"].";"; # need to create the table in the database.
-	}else{
-		$q = "insert into promotional_code (promotional_code, value, type) values ('$promotional_code', $value, '$type')"; # need to create the table in the database.
 	}
 		if(mysqli_query($con, $q)){
 			header("location:promotional_codes.php");
@@ -188,6 +205,23 @@
 
 
 	}
+
+	// delete the promotional codes
+	if (isset($_POST['delete_code'])) {
+		# updated the promotional codes
+	if(isset($_POST["id"])&& $_POST['id']!=""){
+		$q = "DELETE from promotional_code WHERE id=".$_POST["id"].";"; # need to create the table in the database.
+	}
+		if(mysqli_query($con, $q)){
+			header("location:promotional_codes.php");
+		}else{
+			var_dump($q);
+			throw new exception(mysqli_error($con));
+		};
+
+
+	}
+
 	
 ?>
 

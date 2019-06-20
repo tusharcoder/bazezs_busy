@@ -188,7 +188,7 @@ $result = mysqli_query($con, $q);
           </form>
       </td>
       <td role="cell">
-          <form method="post">
+          <form method="post" action="operations.php" onsubmit="return confirm('Are you sure to delete ?')">
               <input type="hidden" name="id" value="<?php echo $rec['id']; ?>">
 
               <input type="submit" name="delete_code" value="Delete" class="btn btn-danger">
