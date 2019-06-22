@@ -172,7 +172,7 @@ error_reporting(E_ALL);
 	// add new promotional codes
 	if (isset($_POST['update_promotional_codes'])) {
 		# updated the promotional codes
-		$promotional_code = $_POST["promotional_code"];
+		$promotional_code = strtolower($_POST["promotional_code"]);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 		$q="insert into promotional_code (promotional_code, value, type) values ('$promotional_code', $value, '$type')";
@@ -190,7 +190,7 @@ error_reporting(E_ALL);
 	// edit the promotional codes
 	if (isset($_POST['update_promotional_codes_edit'])) {
 		# updated the promotional codes
-		$promotional_code = $_POST["promotional_code"];
+		$promotional_code = strtolower($_POST["promotional_code"]);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 		if(isset($_POST["id"])&& $_POST['id']!=""){
