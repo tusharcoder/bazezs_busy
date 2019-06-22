@@ -12,6 +12,52 @@ $user_name = $_POST['user_name'];
 $user_email = $_POST['user_email'];
 $user_ip = $_POST['user_ip'];
 
+// var_dump($_POST);
+$effective_price =0;
+$discount = 0;
+$q = 'SELECT * FROM services WHERE id='.$order_service_id.';';
+$result = mysqli_query($con, $q);
+if (mysqli_num_rows($result) > 0) {
+	// echo 1;
+	$service =  mysqli_fetch_assoc($result);
+	$order_service_price = $service['service_price'];
+	global $effective_price;
+	global $discount;
+	// var_dump($_POST);
+	if (isset($_POST['promotional_code'])&&$_POST['promotional_code']!=''){
+		// echo 1;
+		$pro_q = "SELECT * FROM promotional_code WHERE promotional_code='".$_POST['promotional_code']."';";
+		$pro_r =mysqli_query($con, $pro_q);
+		// var_dump("csacas");
+		if(mysqli_num_rows($pro_r)>0){
+			// echo 1;
+			$code_r = mysqli_fetch_assoc($pro_r);
+			// var_dump($code_r);
+			$code_type = $code_r['type'];
+			$code_value = $code_r['value'];
+			// echo $code_type;
+			if ($code_type == "percentage"){
+				$discount = (float)($code_value/100)*$order_service_price;
+				// var_dump($discount);
+			}elseif ($code_type == "fixed_value") {
+				// echo 1;
+				if ($code_value > $order_service_price){
+					throw new Exception('discount price is greator than the price of order'); #this error has to be handles
+					exit();
+				}
+				// echo 1;
+				$discount = $code_value;
+			}
+
+		}
+
+	}else{
+		$discount = 0;
+	}
+	$effective_price = $order_service_price - $discount;
+	// var_dump($discount);
+}
+
 \Stripe\Stripe::setApiKey('sk_test_ij9PEMH2LeTPq4tAnarHWp1q00JRhzg5dV');
 
 // Token is created using Checkout or Elements!
@@ -20,7 +66,7 @@ $token = $_POST['stripeToken'];
 
 
 	$charge = \Stripe\Charge::create([
-		'amount' => 100*100,
+		'amount' => (int) (100*$effective_price),
 		'currency' => 'usd',
 		'description' => 'Example charge',
 		'source' => $token,
@@ -33,9 +79,12 @@ $token = $_POST['stripeToken'];
 				user_name = ?,
 				user_email = ?,
 				user_ip = ?,
-				order_payment_success=1
+				order_payment_success=1,
+				discount=".$discount.",
+				order_amount = ".$effective_price."
 			WHERE order_id = '$order_id'
 		";
+		// var_dump($query);
 		$stmt = mysqli_prepare($con, $query);
 		mysqli_stmt_bind_param($stmt, 'sss',$user_name,$user_email,$user_ip);
 		mysqli_stmt_execute($stmt);

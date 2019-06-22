@@ -135,13 +135,13 @@
 						</div>
 					</div>
 					<div class="well">
-						<p style="text-align:right;color:rgb(82,126,199);cursor:pointer" onclick="myFunction()">Have a discount code? Click to enter it.</p>
-						<p id="demo"></p>
-					</div>
-					<div class="well">
 					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form" enctype="multipart/form-data">
 						<input type="hidden" name="order_id" value="<?php echo $order_id?>">
 						<input type="hidden" name="order_service_id" value="<?php echo $order_service_id?>">
+						<div class="well">
+						<p style="text-align:right;color:rgb(82,126,199);cursor:pointer" onclick="myFunction()">Have a discount code? Click to enter it.</p>
+						<p id="demo"></p>
+					</div>
 							<div class="form-group">
 							  <input type="text" class="form-control" placeholder="Name" onkeyup="test()" id="user-name" name="user_name" required>
 							</div>
@@ -193,7 +193,7 @@
 </script>
 <script>
 function myFunction() {
-  document.getElementById("demo").innerHTML = "<input type='text' class='form-control'>";
+  document.getElementById("demo").innerHTML = "<input type='text' name='promotional_code' class='form-control'>";
 }
 </script>
 </html>
