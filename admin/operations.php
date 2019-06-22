@@ -188,7 +188,7 @@ error_reporting(E_ALL);
 
 
 	// edit the promotional codes
-	if (isset($_POST['edit_code'])) {
+	if (isset($_POST['update_promotional_codes_edit'])) {
 		# updated the promotional codes
 		$promotional_code = $_POST["promotional_code"];
 		$value = $_POST['value'];
