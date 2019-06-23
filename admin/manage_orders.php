@@ -60,7 +60,7 @@
 				</thead>
 				<tbody>
 				<?php 
-					$result = mysqli_query($con, "SELECT * FROM orders INNER JOIN order_service ON orders.order_service_id = order_service.order_service_id WHERE order_payment_success=1 ORDER BY order_time DESC");
+					$result = mysqli_query($con, "SELECT * FROM orders INNER JOIN order_service ON orders.order_service_id = order_service.order_service_id WHERE order_payment_success=1 ORDER BY order_id DESC");
 					while($row = mysqli_fetch_array($result)){
 				?>
 					<tr>
@@ -87,7 +87,9 @@
 	<script type="text/javascript" src="js/dt3.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#example').DataTable();
+			$('#example').DataTable(
+				        "order": [[ 1, "desc" ]]
+				);
 		} );
 	</script>
 	<!-- //calendar -->
