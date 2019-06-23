@@ -55,7 +55,7 @@ require('constant.php');
 	<div class="content">
 		<h1>Contact Form</h1>
 		<div id="message">
-		<form id="frmContact" action="" method="POST" novalidate="novalidate">
+		<form id="frmContact" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
 			<div class="label">Subject:</div>
 			<div class="field">
 				<input type="text" id="subject" name="subject" placeholder="Subject.." title="Please enter your name" class="required" aria-required="true" required>
@@ -89,18 +89,22 @@ require('constant.php');
 			$("#mail-status").hide();
 			$('#send-message').hide();
 			$('#loader-icon').show();
+			var data = new FormData();
+			data.append("attachment",$('input[name=attachment]')[0].files[0]);
+			data.append("subject",$('input[name="subject"]').val());
+			data.append("email",$('input[name="email"]').val());
+			data.append("g-recaptcha-response",$('input[name=attachment]')[0].files[0]);
+			data.append("message",$('textarea[name="message"]').val());
 			$.ajax({
 				url: "do_contact.php",
 				type: "POST",
-				dataType:'json',
-				data: {
-				"subject":$('input[name="subject"]').val(),
-				"email":$('input[name="email"]').val(),
-				"message":$('textarea[name="message"]').val(),
-				"g-recaptcha-response":$('textarea[id="g-recaptcha-response"]').val()},				
+				processData: false,
+  				contentType:false,
+				data: data,
 				success: function(response){
 				$("#mail-status").show();
 				$('#loader-icon').hide();
+				response = JSON.parse(response);
 				if(response.type == "error") {
 					$('#send-message').show();
 					$("#mail-status").attr("class","error");				

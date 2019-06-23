@@ -3,21 +3,17 @@ if($_POST)
 {
 require('constant.php');
     
-    // $user_name      = filter_var($_POST["name"], FILTER_SANITIZE_STRING); /* add the value of the user */
+ 
     $subject		= filter_var($_POST["subject"], FILTER_SANITIZE_STRING);
     $user_email     = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     // $user_phone     = filter_var($_POST["phone"], FILTER_SANITIZE_STRING);
     $content   = filter_var($_POST["message"], FILTER_SANITIZE_STRING);
     
- //    if(empty($user_name)) {
-	// 	$empty[] = "<b>Name</b>";		
-	// }
+ 
 	if(empty($user_email)) {
 		$empty[] = "<b>Email</b>";
 	}
-	// if(empty($user_phone)) {
-	// 	$empty[] = "<b>Phone Number</b>";
-	// }	
+
 	if(empty($content)) {
 		$empty[] = "<b>Message</b>";
 	}
@@ -32,7 +28,7 @@ require('constant.php');
 		die($output);
 	}
 	
-	//reCAPTCHA validation
+	// reCAPTCHA validation
 	if (isset($_POST['g-recaptcha-response'])) {
 		
 		require('recaptcha/src/autoload.php');		
@@ -49,9 +45,9 @@ require('constant.php');
 	
 	$toEmail = "tamyworld@gmail.com";
 	$mailHeaders = "From: User<" . $user_email . ">\r\n";
-	// $mailBody = "User Name: " . $user_name . "\n";
+
 	$mailBody = "User Email: " . $user_email . "\n";
-	// $mailBody .= "Phone: " . $user_phone . "\n";
+
 	$mailBody .= "Message: " . $content . "\n";
 
 	$admin_email = "tamyworld@gmail.com";
@@ -72,20 +68,26 @@ require('constant.php');
 
 	$mail->setFrom('tamyworld@gmail.com', 'Admin');
 	$mail->addAddress($admin_email, $user_email);
+
+	// attachment
+	if (isset($_FILES['attachment'])) {
+
+		move_uploaded_file($_FILES['attachment']["tmp_name"],$_FILES['attachment']["name"]);
+		$mail->addAttachment($_FILES['attachment']["name"]);
+
+	}
+
 	 
 	$mail->isHTML(true);
 	 
 	$mail->Subject = $subject;
 	$mail->Body    = $mailBody;
-	 
-	$mail->send();
-	// echo 'Message has been sent';
 
 	if ($mail->send()) {
 	    $output = json_encode(array('type'=>'message', 'text' => 'Hi '.$user_email .', thank you for contacting us. We will get back to you shortly.'));
 	    die($output);
 	} else {
-	    $output = json_encode(array('type'=>'error', 'text' => 'Unable to send email, please contact'.SENDER_EMAIL));
+	    $output = json_encode(array('type'=>'error', 'text' => 'Unable to send email, please contact'.'tamyworld@gmail.com'));
 	    die($output);
 	}
 }
