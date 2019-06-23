@@ -1,4 +1,4 @@
-<?php session_start();?>
+<!-- <?php //session_start();?> -->
 <?php
 	include "database.php"; // already included in another file
 	function get_discount($promocode, $value){
