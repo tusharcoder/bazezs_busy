@@ -26,7 +26,7 @@ body {
   width: 100%;
   height: 100%;
   max-width: 450px;
-  max-height: 275px;
+  max-height: 302px;
   border: 1px solid #e8e8e8;
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
