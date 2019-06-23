@@ -2,6 +2,7 @@
 <?php
 	include "database.php";
 	include "functions.php";
+	include "get_discount.php";
 	$order_id = 0;
 	if(isset($_SESSION['order_id'])){
 		$order_id = strval($_SESSION['order_id']);
@@ -114,6 +115,11 @@
 												if ($row = mysqli_fetch_array($result)){
 													$price = $row['service_price'];
 													$service_name = $row['service_name'];
+													if (isset($_GET["code"]) && $_GET["code"]!=""){
+															$discount = get_discount($_GET["code"], $price);
+														}
+														else
+															{$discount = 0;}
 												}else{
 													    throw new Exception("No service selected or selected service not available, try again later");
 
@@ -123,13 +129,13 @@
 										<?php echo strtoupper($service_name)." ORDER"; ?> 
 									</td>
 									<td>
-										<p style="margin-top:20px;float:right">$<?php echo($price); ?></p>
+										<p style="margin-top:20px;float:right">$<?php echo($price-$discount); ?></p>
 									</td>
 								</tr>
 							</table><hr/>
 							<table class="table">
 								<tr>
-									<td style="float:right">Total: $<?php echo($price); ?></td>
+									<td style="float:right">Total: $<?php echo($price-$discount); ?></td>
 								</tr>
 							</table>
 						</div>
@@ -140,7 +146,11 @@
 						<input type="hidden" name="order_service_id" value="<?php echo $order_service_id?>">
 						<div class="well">
 						<p style="text-align:right;color:rgb(82,126,199);cursor:pointer" onclick="myFunction()">Have a discount code? Click to enter it.</p>
-						<p id="demo"></p>
+							<p id="demo">
+						<?php if (isset($_GET['code'])){ ?>
+								<input type='text' name='promotional_code' value = "<?php echo ($_GET['code']); ?>" class='form-control'></p><?php }?>	
+						
+						
 					</div>
 							<div class="form-group">
 							  <input type="text" class="form-control" placeholder="Name" onkeyup="test()" id="user-name" name="user_name" required>
@@ -164,7 +174,7 @@
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
-								data-amount="<?php echo(100*$price);?>"
+								data-amount="<?php echo(100*($price-$discount));?>"
 								data-name="UNIQLO"
 								data-description="Pay Now"
 								data-image="images/logo/uniqlo.png"
@@ -183,7 +193,7 @@
 	function test() {
         var user_name = document.getElementById("user-name");
         var user_email = document.getElementById("user-email");
-        var btn = document.getElementById("btn");
+        var btn = $("button[type='submit']");
         if(user_name.value!='' && user_email.value!==''){
             btn.disabled=false;
         }else{
@@ -192,8 +202,51 @@
     }
 </script>
 <script>
+function updateQueryStringParameter(uri, key, value) {
+  var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+  var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+  if (uri.match(re)) {
+    return uri.replace(re, '$1' + key + "=" + value + '$2');
+  }
+  else {
+    return uri + separator + key + "=" + value;
+  }
+}
+
 function myFunction() {
   document.getElementById("demo").innerHTML = "<input type='text' name='promotional_code' class='form-control'>";
+  $("input[name=promotional_code]").on('blur', function(){
+		var value = $(this).val();
+		var uri = window.location.href;
+		uri = updateQueryStringParameter(uri,"code",value);
+		window.location.href = uri
+	}).bind(this);
 }
+
+// function get_discount(promocode, value){
+// /* This function will call the discount php script and set the discount of the order*/
+// var user = {
+//     'promocode': promocode,
+//     'value': value,
+// };
+// var datastr = JSON.stringify(user);
+// $.ajax({
+//     url: 'get_discount.php',
+//     type: 'post',
+//     data: ,
+//     success: function(response){
+//         //do whatever.
+//     }
+// });
+
+// }
+$(document).ready(function(){
+	$("input[name=promotional_code]").on('blur', function(){
+		var value = $(this).val();
+		var uri = window.location.href;
+		uri = updateQueryStringParameter(uri,"code",value);
+		window.location.href = uri
+	}).bind(this);
+})
 </script>
 </html>
