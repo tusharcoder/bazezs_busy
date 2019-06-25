@@ -222,6 +222,76 @@ error_reporting(E_ALL);
 
 	}
 
+	// delete the promotional codes
+	if (isset($_POST['manage_human_orc_icon'])) {
+		# updated the promotional codes
+		
+		// $orc_icon = $_FILES["orc_icon"];
+		if (isset($_FILES["human_icon"])) {
+			// $human_icon = $_FILES["human_icon"];
+			$human_icon_file = $_FILES["human_icon"];
+			$name = $human_icon_file['name'];
+			list($name, $type) = explode(".",$name);
+			$full_name = $name.((string)time()).".".$type;
+			$human_dest = "../uploads/".$full_name;
+			move_uploaded_file($_FILES["human_icon"]["tmp_name"], $human_dest);
+			//insert into database the human icon
+			// $q = "insert into human_orc_icon (path,name) values ('".$human_dest."', 'human')";
+			// mysql_query($con,$q);
+			$q = "select * from icons where id=1";
+			
+			$result = mysqli_query($con, $q);
+			
+			if (mysqli_num_rows($result)){
+			
+				$u_q = "UPDATE icons
+SET human = '".$full_name."' WHERE id=1;";
+				mysqli_query($con, $u_q);
+			
+			}else{
+			
+				$i_q = "INSERT into icons (id,human) values (1,'".$full_name."')";
+				mysqli_query($con, $i_q);
+			
+			}
+		}
+
+		if (isset($_FILES["orc_icon"])) {
+			// $orc_icon = $_FILES["orc_icon"];
+
+			
+			$orc_icon_file = $_FILES["orc_icon"];
+			$name = $orc_icon_file['name'];
+			list($name, $type) = explode(".",$name);
+			
+			$full_name = $name.((string)time()).".".$type;
+			$orc_dest = "../uploads/".$full_name;
+			
+			move_uploaded_file($_FILES["orc_icon"]["tmp_name"], $orc_dest);
+			//insert into database the orc icon
+			// $q = "insert into human_orc_icon (path,name) values ('".$orc_dest."', 'orc')";
+			// mysql_query($con,$q);
+			$q = "select * from icons where id=1";
+			$result = mysqli_query($con, $q);
+			
+			if (mysqli_num_rows($result)){
+			
+				$u_q = "UPDATE icons
+SET orc = '".$full_name."' WHERE id=1;";
+			
+				mysqli_query($con, $u_q);
+			}else{
+
+				$i_q = "INSERT into icons (id, orc) values (1,'".$full_name."')";
+				mysqli_query($con, $i_q);
+			
+		}
+		}
+			$_SESSION["success_message"] = "icons updated successfully";
+			header("location:manage_human_orc_icon.php");
+
+	}
+
 	
 ?>
 
