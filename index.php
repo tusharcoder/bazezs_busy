@@ -2,7 +2,9 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
-   <?php include "headerlinks.php";?>
+   <?php include "headerlinks.php";
+   include "database.php";
+   ?>
     <style type="text/css">
     /* Take care of image borders and formatting, client hacks */
     img { max-width: 450px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
