@@ -322,6 +322,20 @@
         </div>
         </div>
         </div>
+        <?php 
+        $q = "Select * from icons";
+        $res = mysqli_query($con, $q);
+        if (mysqli_num_rows($res)){
+          $res = mysqli_fetch_array($res);
+          $orc = "uploads/".$res['orc'];
+          $human = "uploads/".$res['human'];
+        }else{
+          $orc = "icons/index-page/orc.png";
+          $human = "icons/index-page/human.png";
+          
+
+        }
+        ?>
 		
 		<div class="htc__brand__area bg__white ptb--80">
             <div class="container">
@@ -347,7 +361,7 @@
 								<td class="header-lg">
 								  <center>
 									  <div class="">
-									  <img src="icons/index-page/human.png" class="img-circle circle human" onclick="test('human', 1, 'Human')">
+									  <img src="<?php echo $human;?>" class="img-circle circle human" onclick="test('human', 1, 'Human')">
 									  </div>
 										<p class="text"><b>Human</b></p>
 								  </center>
@@ -355,7 +369,7 @@
 								<td class="header-lg">
 								  <center>
 									  <div class="">
-										<img src="icons/index-page/orc.png" class="img-circle circle orc" onclick="test('orc', 2, 'Orc')">
+										<img src="<?php echo $orc;?>" class="img-circle circle orc" onclick="test('orc', 2, 'Orc')">
 									  </div>
 										<p class="text"><b>Orc</b></p>
 								  </center>
