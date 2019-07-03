@@ -292,6 +292,82 @@ SET orc = '".$full_name."' WHERE id=1;";
 
 	}
 
+	if (isset($_POST["manage_personality_icons"])) {
+		# manage the personality icons
+		echo 1;
+		$d = $_FILES;
+		// $path = "../icons/personality/";
+		// $personalities = array(
+		// 	"Sages"=>"B1",
+		// 	"Warrior"=>"B2",
+		// 	"War Hero"=>"B3",
+		// 	"Mystic"=>"B4",
+		// 	"Paladin"=>"B5",
+		// 	"Rogue"=>"B6",
+		// 	"Miner"=>"B7",
+		// 	"Heretic"=>"B8",
+		// 	"Artisan"=>"B9",
+		// 	"Priest"=>"B10",
+		// 	"Assassin"=>"B11",
+		// 	"Death Knight"=>"B12",
+		// )
+		$personalities = array(
+			"B1"=>"Sages",
+			"B2"=>"Warrior",
+			"B3"=>"War Hero",
+			"B4"=>"Mystic",
+			"B5"=>"Paladin",
+			"B6"=>"Rogue",
+			"B7"=>"Miner",
+			"B8"=>"Heretic",
+			"B9"=>"Artisan",
+			"B10"=>"Priest",
+			"B11"=>"Assassin",
+			"B12"=>"Death Knight",
+		);
+		echo 2;
+		foreach ($personalities as $k => $v) {
+			# code...
+			// echo $_FILES;
+		$ic_dir = "../icons/personality/";
+		if(isset($d[$k]))
+		{
+			$f = $d[$k];
+			$name = $f['name'];
+			list($name, $type) = explode(".",$name);
+			
+			$new_name = $k.".".$type;
+			$dest = $ic_dir.$new_name;
+			echo $dest;
+			//remove the file if already exist
+			if(file_exists($dest)){
+				unlink($dest);
+			}
+			
+			move_uploaded_file($_FILES["orc_icon"]["tmp_name"], $orc_dest);
+			move_uploaded_file($f["tmp_name"], $dest);
+			}	
+			$q = "Update user_personality set icon='".$new_name."' where user_personality_name="."'".$v."'";
+			mysqli_query($con, $q);
+			echo 3;
+		}
+		// // if(isset($d["sages"])){
+		// // 	$f = $d["sages"];
+		// // 	$name = $f['name'];
+		// // 	list($name, $type) = explode(".",$name);
+			
+		// // 	$name = "B1".".".$type;
+		// // 	$dest = "../uploads/".$name;
+			
+		// // 	// move_uploaded_file($_FILES["orc_icon"]["tmp_name"], $orc_dest);
+		// // 	move_uploaded_file($f, $dest)
+		// // }
+			$_SESSION["success_message"] = "icons updated successfully";
+			header("location:manage_personality_icons.php");
+
+
+	}
+
 	
 ?>
 
