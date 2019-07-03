@@ -43,6 +43,12 @@
                         <span>Manage Personality Icons</span>
                     </a>
                 </li>
+                 <li>
+                    <a class="active" href="manage_attribute_icons.php" <?php if($pagename=='manage_attribute_icons.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
+                        <i class="fas fa-user"></i>
+                        <span>Manage Attribute Icons</span>
+                    </a>
+                </li>
 				<li>
                     <a class="active" href="admin_email.php" <?php if($pagename=='admin_email.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
                         <i class="fas fa-envelope"></i>
