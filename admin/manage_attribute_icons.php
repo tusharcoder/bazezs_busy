@@ -58,6 +58,8 @@
 
                             <?php if (isset($data["Agreeable"])){
                                 $icon = "../icons/attributes/".$data["Agreeable"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -75,6 +77,8 @@
 
                             <?php if (isset($data["Ambitious"])){
                                 $icon = "../icons/attributes/".$data["Ambitious"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -92,6 +96,8 @@
 
                             <?php if (isset($data["Brutal"])){
                                 $icon = "../icons/attributes/".$data["Brutal"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -109,6 +115,8 @@
 
                             <?php if (isset($data["Charisma"])){
                                 $icon = "../icons/attributes/".$data["Charisma"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -125,6 +133,8 @@
 
                             <?php if (isset($data["Creative"])){
                                 $icon = "../icons/attributes/".$data["Creative"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -142,6 +152,8 @@
 
                             <?php if (isset($data["Elegant"])){
                                 $icon = "../icons/attributes/".$data["Elegant"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -158,6 +170,8 @@
 
                             <?php if (isset($data["Leadership"])){
                                 $icon = "../icons/attributes/".$data["Leadership"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -174,6 +188,8 @@
 
                             <?php if (isset($data["Loyal"])){
                                 $icon = "../icons/attributes/".$data["Loyal"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -191,6 +207,8 @@
 
                             <?php if (isset($data["Openness"])){
                                 $icon = "../icons/attributes/".$data["Openness"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -208,6 +226,8 @@
 
                             <?php if (isset($data["Sneaky"])){
                                 $icon = "../icons/attributes/".$data["Sneaky"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -224,6 +244,8 @@
 
                             <?php if (isset($data["Strong"])){
                                 $icon = "../icons/attributes/".$data["Strong"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -240,6 +262,8 @@
 
                             <?php if (isset($data["Trusting"])){
                                 $icon = "../icons/attributes/".$data["Trusting"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 

@@ -340,7 +340,7 @@ SET orc = '".$full_name."' WHERE id=1;";
 
 	if (isset($_POST["manage_attribute_icons"])) {
 		# manage the attribute icons
-		echo 1;
+
 		$d = $_FILES;
 		$strengths = array(
 			"C4" =>"Agreeable",
@@ -356,12 +356,12 @@ SET orc = '".$full_name."' WHERE id=1;";
 			"C2"=>"Strong",
 			"C10"=>"Trusting",
 		);
-		echo 2;
+
 		foreach ($strengths as $k => $v) {
 			# code...
 			// echo $_FILES;
 		$ic_dir = "../icons/attributes/";
-		if(isset($d[$k]))
+		if(isset($d[$k]) && filesize($d[$k]["tmp_name"]))
 		{
 			$f = $d[$k];
 			$name = $f['name'];
@@ -369,16 +369,16 @@ SET orc = '".$full_name."' WHERE id=1;";
 			
 			$new_name = $k.".".$type;
 			$dest = $ic_dir.$new_name;
-			echo $dest;
+
 			//remove the file if already exist
 			if(file_exists($dest)){
 				unlink($dest);
 			}			
 			move_uploaded_file($f["tmp_name"], $dest);
-			}	
 			$q = "Update user_attribute set icon='".$new_name."' where user_attribute_name="."'".$v."'";
 			mysqli_query($con, $q);
-			echo 3;
+			}	
+			
 		}
 		
 			$_SESSION["success_message"] = "icons updated successfully";
