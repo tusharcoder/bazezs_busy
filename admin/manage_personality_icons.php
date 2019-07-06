@@ -24,7 +24,6 @@
     foreach($results as $row){
         $data[$row[1]] = $row[2];
     }
-    var_dump($data);
      ?>
 </head>
 <body>
