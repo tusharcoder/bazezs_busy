@@ -310,26 +310,26 @@ SET orc = '".$full_name."' WHERE id=1;";
 			"B12"=>"Death Knight",
 		);
 		foreach ($personalities as $k => $v) {
+		$new_name = "";
 			# code...
 		$ic_dir = "../icons/personality/";
-		if(isset($d[$k]))
+		if(isset($d[$k]) && filesize($d[$k]["tmp_name"]))
 		{
 			$f = $d[$k];
 			$name = $f['name'];
 			list($name, $type) = explode(".",$name);
 			
 			$new_name = $k.".".$type;
+			// var_dump($new_name);
 			$dest = $ic_dir.$new_name;
 			//remove the file if already exist
 			if(file_exists($dest)){
 				unlink($dest);
 			}
-			
-			move_uploaded_file($_FILES["orc_icon"]["tmp_name"], $orc_dest);
 			move_uploaded_file($f["tmp_name"], $dest);
-			}	
-			$q = "Update user_personality set icon='".$new_name."' where user_personality_name="."'".$v."'";
+			$q = "Update user_personality set user_personality_image='".$new_name."' where user_personality_name="."'".$v."'";
 			mysqli_query($con, $q);
+			}	
 		}
 
 			$_SESSION["success_message"] = "icons updated successfully";
@@ -373,9 +373,7 @@ SET orc = '".$full_name."' WHERE id=1;";
 			//remove the file if already exist
 			if(file_exists($dest)){
 				unlink($dest);
-			}
-			
-			move_uploaded_file($_FILES["orc_icon"]["tmp_name"], $orc_dest);
+			}			
 			move_uploaded_file($f["tmp_name"], $dest);
 			}	
 			$q = "Update user_attribute set icon='".$new_name."' where user_attribute_name="."'".$v."'";

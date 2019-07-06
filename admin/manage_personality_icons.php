@@ -24,6 +24,7 @@
     foreach($results as $row){
         $data[$row[1]] = $row[2];
     }
+    var_dump($data);
      ?>
 </head>
 <body>
@@ -58,6 +59,8 @@
 
                             <?php if (isset($data["Sages"])){
                                 $icon = "../icons/personality/".$data["Sages"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -75,6 +78,8 @@
 
                             <?php if (isset($data["Warrior"])){
                                 $icon = "../icons/personality/".$data["Warrior"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -92,6 +97,8 @@
 
                             <?php if (isset($data["War Hero"])){
                                 $icon = "../icons/personality/".$data["War Hero"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -109,6 +116,8 @@
 
                             <?php if (isset($data["Mystic"])){
                                 $icon = "../icons/personality/".$data["Mystic"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -125,6 +134,8 @@
 
                             <?php if (isset($data["Paladin"])){
                                 $icon = "../icons/personality/".$data["Paladin"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
@@ -134,14 +145,16 @@
                     
                     <div class="form-group row">
                         <div class="col-sm-1"></div>
-                        <label class="col-sm-3 control-label"><b>Rouge Icon:</b></label>
+                        <label class="col-sm-3 control-label"><b>Rogue Icon:</b></label>
                         <div class="col-sm-6">
                             <input type="file" name="B6" >
                         </div>
                         <div class="col-sm-2">
 
-                            <?php if (isset($data["Rouge"])){
-                                $icon = "../icons/personality/".$data["Rouge"];
+                            <?php if (isset($data["Rogue"])){
+                                $icon = "../icons/personality/".$data["Rogue"];
+                            }else{
+                                $icon = "";
                             }
                              ?>
 
