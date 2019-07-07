@@ -94,12 +94,12 @@
                         <label class="col-sm-3 control-label"><b>SMTP Authentication:</b></label>
                         <div class="col-sm-2">
                             <label class="radio-inline">
-							  <input type="radio" name="email_authentication" value="No" <?php if ($row['email_authentication']=='No') echo 'checked'?>> No
+							  <input type="radio" name="email_authentication" value="No" <?php if ($row['email_authentication']==0) echo 'checked'?>> No
 							</label>
 						</div>
 						<div class="col-sm-2">
                             <label class="radio-inline">
-							  <input type="radio" name="email_authentication" value="Yes" <?php if ($row['email_authentication']=='Yes') echo 'checked'?>> Yes
+							  <input type="radio" name="email_authentication" value="Yes" <?php if ($row['email_authentication']==1) echo 'checked'?>> Yes
 							</label>
 						</div>
                     </div> 
