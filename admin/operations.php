@@ -240,7 +240,7 @@ error_reporting(E_ALL);
 		// echo $q;
 		// exit;
 		if(mysqli_query($con, $q)){
-			header("location:promotional_codes.php");
+			header("location:view_promotional_codes.php");
 		}else{
 			var_dump($q);
 			throw new exception(mysqli_error($con));
@@ -309,9 +309,9 @@ error_reporting(E_ALL);
 		$q = "UPDATE promotional_code SET promotional_code='$promotional_code', value='$value', type='$type', limit_usage = $limit_usage, limit_usage_number_of_times = $limit_usage_number_of_times, start_date = '$start_date', start_time = '$start_time', limit_by_time = $limit_by_time, end_date = '$end_date', end_time = '$end_time' WHERE id=".$_POST["id"].";"; # need to create the table in the database.
 	}
 		if(mysqli_query($con, $q)){
-			header("location:promotional_codes.php");
+			header("location:view_promotional_codes.php");
 		}else{
-			var_dump($q);
+			// var_dump($q);
 			throw new exception(mysqli_error($con));
 		};
 
@@ -325,7 +325,7 @@ error_reporting(E_ALL);
 		$q = "DELETE from promotional_code WHERE id=".$_POST["id"].";"; # need to create the table in the database.
 	}
 		if(mysqli_query($con, $q)){
-			header("location:promotional_codes.php");
+			header("location:view_promotional_codes.php");
 		}else{
 			var_dump($q);
 			throw new exception(mysqli_error($con));
