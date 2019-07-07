@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="active" href="promotional_codes.php" <?php if($pagename=='promotional_codes.php') echo 'style="background:black !important;"'; ?>>
+                    <a class="active" href="promotional_code_editing.php" <?php if($pagename=='promotional_codes.php') echo 'style="background:black !important;"'; ?>>
                         <i class="fas fa-bullhorn"></i>
                         <span>Manage Promotional codes</span>
                     </a>
