@@ -193,18 +193,22 @@ if(isset($_POST['edit_code'])){
                             </div>
                         </div>
                     </fieldset>
+
+                    <!-- <div class="form-group row">
+                        <div class="offset-sm-9 col-sm-3">
+                            
+                        </div>
+                    </div> -->
 					
                     <?php if (isset($_POST['edit_code'])){ ?>
                         <div class="form-group row">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-6 offset-sm-2">
+                        <div class="col-sm-3 offset-sm-9">
                             <button type="submit" name="update_promotional_codes_edit" class="btn btn-primary" style="background:#007bff!important;border:#007bff!important">Save Changes</button>
                         </div>
                     </div>
                     <?php }else {?>
                     <div class="form-group row">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-6 offset-sm-2">
+                        <div class="col-sm-3 offset-sm-9">
                             <button type="submit" name="update_promotional_codes" class="btn btn-primary" style="background:#007bff!important;border:#007bff!important">Save Changes</button>
                         </div>
                     </div>
