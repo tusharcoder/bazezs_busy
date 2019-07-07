@@ -190,9 +190,9 @@ error_reporting(E_ALL);
 		$limit_usage =  function () use ($_POST){
 			if (isset($_POST['limit_usage'])) {
 				# code...
-				return true;
+				return 1;
 			}else{
-				return false;
+				return 0;
 			}
 		};
 		$limit_usage = $limit_usage();
@@ -211,9 +211,9 @@ error_reporting(E_ALL);
 		$limit_by_time = function () use ($_POST){
 			if (isset($_POST['limit_by_time'])) {
 				# code...
-				return true;
+				return 1;
 			}else{
-				return false;
+				return 0;
 			}
 		};
 		$limit_by_time = $limit_by_time();
@@ -257,8 +257,57 @@ error_reporting(E_ALL);
 		$promotional_code = strtolower($_POST["promotional_code"]);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
+		# new fields
+		$limit_usage =  function () use ($_POST){
+			if (isset($_POST['limit_usage'])) {
+				# code...
+				return 1;
+			}else{
+				return 0;
+			}
+		};
+		$limit_usage = $limit_usage();
+
+		$limit_usage_number_of_times = 0;
+		if ($limit_usage) {
+			# code...
+			try {
+				$limit_usage_number_of_times = $_POST["limit_usage_number_of_times"];	
+			} catch (Exception $e) {
+					var_dump($e);
+			}
+			
+		}
+
+		$limit_by_time = function () use ($_POST){
+			if (isset($_POST['limit_by_time'])) {
+				# code...
+				return 1;
+			}else{
+				return 0;
+			}
+		};
+		$limit_by_time = $limit_by_time();
+
+		$start_date = $_POST["start_date"];
+		$start_time = $_POST["start_time"];
+		
+
+		if ($limit_by_time) {
+			# code...
+			try {
+				$end_date = $_POST["end_date"];
+			$end_time = $_POST["end_time"];		
+			} catch (Exception $e) {
+				$end_date = null;
+			$end_time = null;
+			}
+		}else{
+				$end_date = null;
+			$end_time = null;
+		}
 		if(isset($_POST["id"])&& $_POST['id']!=""){
-		$q = "UPDATE promotional_code SET promotional_code='$promotional_code', value='$value', type='$type' WHERE id=".$_POST["id"].";"; # need to create the table in the database.
+		$q = "UPDATE promotional_code SET promotional_code='$promotional_code', value='$value', type='$type', limit_usage = $limit_usage, limit_usage_number_of_times = $limit_usage_number_of_times, start_date = '$start_date', start_time = '$start_time', limit_by_time = $limit_by_time, end_date = '$end_date', end_time = '$end_time' WHERE id=".$_POST["id"].";"; # need to create the table in the database.
 	}
 		if(mysqli_query($con, $q)){
 			header("location:promotional_codes.php");

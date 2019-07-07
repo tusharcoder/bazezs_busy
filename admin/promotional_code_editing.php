@@ -88,19 +88,36 @@
 /* for edit functionality */
 if(isset($_POST['edit_code'])){
 
-    $q = "SELECT `id`, `promotional_code`, `type`, `value` FROM `promotional_code` WHERE id=".$_POST['id'].";";
+    $q = "SELECT * FROM `promotional_code` WHERE id=".$_POST['id'].";";
     $result = mysqli_query($con, $q);
     $rec = mysqli_fetch_array($result);
     $promotional_code = $rec['promotional_code'];
     $type = $rec['type'];
     $value = $rec['value'];
-        $id = $_POST['id'];
+    $id = $_POST['id'];
+    # new fields
+    $limit_usage = $rec['limit_usage'];
+    $limit_usage_number_of_times = $rec['limit_usage_number_of_times'];
+    $limit_by_time = $rec['limit_by_time'];
+    $start_date = $rec['start_date'];
+    $start_time = $rec['start_time'];
+    $end_date = $rec['end_date'];
+    $end_time = $rec['end_time'];
+
 
 } else {
     $id = "";
     $promotional_code = "";
     $type = "";
     $value = "";
+    # new fields
+    $limit_usage = "";
+    $limit_usage_number_of_times = "";
+    $limit_by_time = "";
+    $start_date = "";
+    $start_time = "";
+    $end_date = "";
+    $end_time = "";
 }
     ?>
 	<section class="wrapper">
@@ -149,10 +166,18 @@ if(isset($_POST['edit_code'])){
                         </legend>
                         <div class="form-group row">
                             <div class="col-sm-12 input-group">
-                                <label class="checkbox-inline"><input class="checkbox" type="checkbox" name="limit_usage" value="true"/> Limit number of times this discount can be used in total.</label>
+                                <label class="checkbox-inline"><input class="checkbox" type="checkbox" name="limit_usage" value="true"<?php if ($limit_usage) {
+                                    ?>
+                                    checked
+                                    <?php
+                                }?>/> Limit number of times this discount can be used in total.</label>
                             </div>
                             <div class="col-sm-3">
-                                <input type="number" class="form-control" name="limit_usage_number_of_times" disabled />
+                                <input type="number" class="form-control" name="limit_usage_number_of_times" value="<?php echo $limit_usage_number_of_times; ?>" <?php if (!$limit_usage) {
+                                    ?>
+                                    disabled
+                                    <?php
+                                }?> />
                             </div>
                                  
                         </div>
@@ -166,30 +191,36 @@ if(isset($_POST['edit_code'])){
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>Start Date</label>
-                                <input type="date" name="start_date"  placeholder="start date" />
+                                <input type="date" name="start_date"  placeholder="start date" value="<?php echo $start_date; ?>" />
                             </div>
 
                             <div class="col-sm-6">
                                 <label>Start Time</label>
-                                <input type="time" name="start_time"  placeholder="start time" />
+                                <input type="time" name="start_time"  placeholder="start time" value="<?php echo $start_time; ?>" />
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label><input type="checkbox" name="limit_by_time" value="true"> Set End Date</label>
+                                <label><input type="checkbox" name="limit_by_time" value="true" <?php if ($limit_by_time) {
+                                    # code...?> checked <?php 
+                                }?>> Set End Date</label>
                             </div>
                         </div>
 
                           <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>End Date</label>
-                                <input type="date" name="end_date"  placeholder="end date" disabled />
+                                <input type="date" name="end_date"  placeholder="end date" value="<?php echo $end_date; ?>" <?php if (!$limit_by_time) {
+                                    # code...?> disabled <?php 
+                                }?> />
                             </div>
 
                             <div class="col-sm-6">
                                 <label>End Time</label>
-                                <input type="time" name="end_time"  placeholder="end time" disabled />
+                                <input type="time" name="end_time"  placeholder="end time" value="<?php echo $end_time; ?>" <?php if (!$limit_by_time) {
+                                    # code...?> disabled <?php 
+                                }?> />
                             </div>
                         </div>
                     </fieldset>
@@ -221,13 +252,13 @@ if(isset($_POST['edit_code'])){
 
 <?php
 
-// $q = "SELECT * FROM promotional_code";
-// $result = mysqli_query($con, $q);
+$q = "SELECT * FROM promotional_code";
+$result = mysqli_query($con, $q);
  ?>
-   <!--      <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <h3>Promotional Codes</h3>
-    -->            <!--  <table role="table">
+                 <table role="table">
   <thead role="rowgroup">
     <tr role="row">
       <th role="columnheader">Id</th>
@@ -264,7 +295,7 @@ if(isset($_POST['edit_code'])){
 <?php } ?>
     </tr>
   </tbody>
-</table> -->
+</table>
             </div>
         </div>
 </section>
