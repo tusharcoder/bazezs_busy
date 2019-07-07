@@ -128,7 +128,7 @@ include "send_mail.php";
 							<img src="icons/index-page/human.png">&nbsp;&nbsp; <b>Lord Arthur</b>
 							<span style="float:right;margin-top:15px;"><b><small>Order ID:</small></b> IN78488</span><br><br>-->
 							
-							<center><div class="circle" style="background:orange;font-size:20px;border:none"><i class="fa fa-commenting" style="color:white !important"></i> </div> <span style="color:green">Request Expert Review </span>
+							<center><div id="request_review" class="circle" style="background:orange;font-size:20px;border:none"><i class="fa fa-commenting" style="color:white !important"></i> </div> <span style="color:green">Request Expert Review </span>
 							</center>
 							<br><br>
 							
@@ -234,5 +234,23 @@ include "send_mail.php";
 		send_mail($subject, $body, $to, null);
 	?>
 	<?php include "footerlinks.php";?>
+	<script type="text/javascript">
+		var order_id = '<?php echo $order_id; ?>';
+		$("#request_review").on("click",function(){
+				$.ajax(
+  'request_review_from_expert.php?order_id='+order_id,
+  {
+      success: function(data) {
+        if (data == "success") {
+        	alert("Review from expert requested successfully");
+        }
+      },
+      error: function() {
+        alert('There was some error requesting the review!');
+      }
+   }
+);
+		});
+	</script>
 </body>
 </html>
