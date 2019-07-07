@@ -67,6 +67,17 @@ error_reporting(E_ALL);
 			$email_authentication = $_POST['email_authentication'];
 			$email_username = $_POST['email_username'];
 			$email_password = $_POST['email_password'];
+
+			$l_email_authentication = strtolower($email_authentication);
+			if ($l_email_authentication == "no") {
+				# code...
+				$email_authentication = false;
+			}
+
+			if ($l_email_authentication == "yes") {
+				# code...
+				$email_authentication = true;
+			}
 			
 			$stmt = mysqli_prepare($con, "UPDATE email_setting SET email_subject=?,  email_address=?, email_from_name=?, email_smtp_host=?, email_port=?,  email_username=?, email_password=?, email_encryption='$email_encryption', email_authentication='$email_authentication'");
 			mysqli_stmt_bind_param($stmt,'sssssss',$email_subject,$email_address,$email_from_name,$email_smtp_host,$email_port,$email_username,$email_password);
