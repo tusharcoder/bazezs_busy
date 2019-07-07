@@ -149,10 +149,10 @@ if(isset($_POST['edit_code'])){
                         </legend>
                         <div class="form-group row">
                             <div class="col-sm-12 input-group">
-                                <label class="checkbox-inline"><input class="checkbox" type="checkbox" value=""/> Limit number of times this discount can be used in total.</label>
+                                <label class="checkbox-inline"><input class="checkbox" type="checkbox" name="limit_usage" value="true"/> Limit number of times this discount can be used in total.</label>
                             </div>
                             <div class="col-sm-3">
-                                <input type="number" class="form-control" name="" />
+                                <input type="number" class="form-control" name="limit_usage_number_of_times"/>
                             </div>
                                  
                         </div>
@@ -166,30 +166,30 @@ if(isset($_POST['edit_code'])){
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>Start Date</label>
-                                <input type="date" name=""  placeholder="start date" />
+                                <input type="date" name="start_date"  placeholder="start date" />
                             </div>
 
                             <div class="col-sm-6">
                                 <label>Start Time</label>
-                                <input type="time" name=""  placeholder="start time" />
+                                <input type="time" name="start_time"  placeholder="start time" />
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label><input type="checkbox" name=""> Set End Date</label>
+                                <label><input type="checkbox" name="limit_by_time" value="true"> Set End Date</label>
                             </div>
                         </div>
 
                           <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>End Date</label>
-                                <input type="date" name=""  placeholder="end date" />
+                                <input type="date" name="end_date"  placeholder="end date" />
                             </div>
 
                             <div class="col-sm-6">
                                 <label>End Time</label>
-                                <input type="time" name=""  placeholder="end time" />
+                                <input type="time" name="end_time"  placeholder="end time" />
                             </div>
                         </div>
                     </fieldset>

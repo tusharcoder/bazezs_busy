@@ -186,7 +186,60 @@ error_reporting(E_ALL);
 		$promotional_code = strtolower($_POST["promotional_code"]);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
-		$q="insert into promotional_code (promotional_code, value, type) values ('$promotional_code', $value, '$type')";
+		# new fields
+		$limit_usage =  function () use ($_POST){
+			if (isset($_POST['limit_usage'])) {
+				# code...
+				return true;
+			}else{
+				return false;
+			}
+		};
+		$limit_usage = $limit_usage();
+
+		$limit_usage_number_of_times = 0;
+		if ($limit_usage) {
+			# code...
+			try {
+				$limit_usage_number_of_times = $_POST["limit_usage_number_of_times"];	
+			} catch (Exception $e) {
+					var_dump($e);
+			}
+			
+		}
+
+		$limit_by_time = function () use ($_POST){
+			if (isset($_POST['limit_by_time'])) {
+				# code...
+				return true;
+			}else{
+				return false;
+			}
+		};
+		$limit_by_time = $limit_by_time();
+
+		$start_date = $_POST["start_date"];
+		$start_time = $_POST["start_time"];
+		
+
+		if ($limit_by_time) {
+			# code...
+			try {
+				$end_date = $_POST["end_date"];
+			$end_time = $_POST["end_time"];		
+			} catch (Exception $e) {
+				$end_date = null;
+			$end_time = null;
+			}
+		}else{
+				$end_date = null;
+			$end_time = null;
+		}
+		
+		$q="insert into promotional_code (promotional_code, value, type, limit_usage, limit_usage_number_of_times, start_date, start_time, limit_by_time, end_date, end_time) values ('$promotional_code', $value, '$type',$limit_usage, $limit_usage_number_of_times,'$start_date','$start_time',$limit_by_time, '$end_date','$end_time')";
+
+		// echo $q;
+		// exit;
 		if(mysqli_query($con, $q)){
 			header("location:promotional_codes.php");
 		}else{
