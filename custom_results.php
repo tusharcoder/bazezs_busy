@@ -10,6 +10,7 @@
 ?>
 <?php
 	include "database.php";
+	include "send_mail.php";
 	$order_id = 0;
 	if(isset($_SESSION['order_id'])){
 		$order_id = strval($_SESSION['order_id']);
@@ -222,23 +223,29 @@
 			</html>
 					';
 		
-		$to = $user_email;
-		$subject = $user_name;
+		// $to = $user_email;
+		// $subject = $user_name;
 		//$htmlContent = file_get_contents("email.html");
 		//$message = 'Thanks for using our service!';
 		
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		// $headers  = 'MIME-Version: 1.0' . "\r\n";
+		// $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 		
 		// Additional headers
 		//$headers .= 'From: User@example.com' . "\r\n";
-		$headers .= 'From: Blazes webmaster@example.com' . "\r\n";
+		// $headers .= 'From: Blazes webmaster@example.com' . "\r\n";
 		
 		//$headers = 'From: User@example.com' . "\r\n" .
 		//'Reply-To: webmaster@example.com' . "\r\n" .
 		//'X-Mailer: PHP/' . phpversion();
 		
-		mail($to, $subject, $message, $headers);
+		// mail($to, $subject, $message, $headers);
+		
+		$subject = "Order Confirmation! Thanks for you order ".$user_name;
+		$body = $message;
+		$to = $user_email;
+		send_mail($subject, $body, $to, null);
+
 	?>
 	<?php include "footerlinks.php";?>
 </body>
