@@ -152,7 +152,7 @@ if(isset($_POST['edit_code'])){
                                 <label class="checkbox-inline"><input class="checkbox" type="checkbox" name="limit_usage" value="true"/> Limit number of times this discount can be used in total.</label>
                             </div>
                             <div class="col-sm-3">
-                                <input type="number" class="form-control" name="limit_usage_number_of_times"/>
+                                <input type="number" class="form-control" name="limit_usage_number_of_times" disabled />
                             </div>
                                  
                         </div>
@@ -184,12 +184,12 @@ if(isset($_POST['edit_code'])){
                           <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>End Date</label>
-                                <input type="date" name="end_date"  placeholder="end date" />
+                                <input type="date" name="end_date"  placeholder="end date" disabled />
                             </div>
 
                             <div class="col-sm-6">
                                 <label>End Time</label>
-                                <input type="time" name="end_time"  placeholder="end time" />
+                                <input type="time" name="end_time"  placeholder="end time" disabled />
                             </div>
                         </div>
                     </fieldset>
@@ -269,5 +269,28 @@ if(isset($_POST['edit_code'])){
         </div>
 </section>
 <?php include "footerlinks.php"; ?>
+<script type="text/javascript">
+    
+    $("input[name=limit_usage]").on("change",function(){
+        if($(this).prop("checked")){
+            $("input[name=limit_usage_number_of_times]").prop("disabled",false);
+        }else{
+            $("input[name=limit_usage_number_of_times]").prop("disabled",true);
+        }
+        
+    });
+
+    $("input[name=limit_by_time]").on("change",function(){
+        if($(this).prop("checked")){
+            $("input[name=end_date]").prop("disabled",false);
+            $("input[name=end_time]").prop("disabled",false);
+        }else{
+            $("input[name=end_date]").prop("disabled",true);
+            $("input[name=end_time]").prop("disabled",true);
+        }
+        
+    });
+
+</script>
 </body>
 </html>
