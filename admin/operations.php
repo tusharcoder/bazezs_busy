@@ -203,7 +203,6 @@ error_reporting(E_ALL);
 			try {
 				$limit_usage_number_of_times = $_POST["limit_usage_number_of_times"];	
 			} catch (Exception $e) {
-					var_dump($e);
 			}
 			
 		}
