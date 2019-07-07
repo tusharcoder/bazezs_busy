@@ -248,56 +248,7 @@ if(isset($_POST['edit_code'])){
             </div>
         </section>
             </div>
-
-
-<?php
-
-$q = "SELECT * FROM promotional_code";
-$result = mysqli_query($con, $q);
- ?>
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Promotional Codes</h3>
-                 <table role="table">
-  <thead role="rowgroup">
-    <tr role="row">
-      <th role="columnheader">Id</th>
-      <th role="columnheader">Promotional Code</th>
-      <th role="columnheader">Type (% / fixed val)</th>
-      <th role="columnheader">Value</th>
-      <th role="columnheader">Edit</th>
-      <th role="columnheader">Delete</th>
-    </tr>
-  </thead>
-  <tbody role="rowgroup">
-    <?php while($rec = mysqli_fetch_array($result)){?>
-    <tr role="row">
-      <td role="cell"><?php echo $rec['id']; ?></td>
-      <td role="cell"><?php echo $rec['promotional_code']; ?></td>
-      <td role="cell"><?php echo $rec['type']; ?></td>
-      <td role="cell"><?php echo $rec['value']; ?></td>
-      <td role="cell">
-          
-          <form method="post">
-              <input type="hidden" name="id" value="<?php echo $rec['id']; ?>">
-
-              <input type="submit" name="edit_code" value="Edit" class="btn btn-primary">
-          </form>
-      </td>
-      <td role="cell">
-          <form method="post" action="operations.php" onsubmit="return confirm('Are you sure to delete ?')">
-              <input type="hidden" name="id" value="<?php echo $rec['id']; ?>">
-
-              <input type="submit" name="delete_code" value="Delete" class="btn btn-danger">
-          </form>
-      </td>
-    </tr>
-<?php } ?>
-    </tr>
-  </tbody>
-</table>
-            </div>
-        </div>
+        
 </section>
 <?php include "footerlinks.php"; ?>
 <script type="text/javascript">

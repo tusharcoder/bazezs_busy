@@ -137,7 +137,7 @@ $result = mysqli_query($con, $q);
       <td role="cell"><?php echo $rec['end_time']; ?></td>
       <td role="cell">
           
-          <form method="post">
+          <form method="post" action="promotional_code_editing.php">
               <input type="hidden" name="id" value="<?php echo $rec['id']; ?>">
 
               <input type="submit" name="edit_code" value="Edit" class="btn btn-primary">
