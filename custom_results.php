@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php session_start();
+include "send_mail.php";
+?>
 <?php
 	$order_id = 0;
 	if(isset($_SESSION['order_id'])){
