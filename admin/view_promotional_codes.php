@@ -102,7 +102,7 @@ $result = mysqli_query($con, $q);
  ?>
         <div class="row">
             <div class="col-lg-12">
-                <h3>Promotional Codes</h3>
+                <h3></h3>
                  <table role="table">
   <thead role="rowgroup">
     <tr role="row">
@@ -110,6 +110,13 @@ $result = mysqli_query($con, $q);
       <th role="columnheader">Promotional Code</th>
       <th role="columnheader">Type (% / fixed val)</th>
       <th role="columnheader">Value</th>
+      <th role="columnheader">Limit by usage</th>
+      <th role="columnheader">Number of usage times allowed</th>
+      <th role="columnheader">Start Date</th>
+      <th role="columnheader">Start time</th>
+      <th role="columnheader">Limit usage by time</th>
+      <th role="columnheader">End Date</th>
+      <th role="columnheader">End Time</th>
       <th role="columnheader">Edit</th>
       <th role="columnheader">Delete</th>
     </tr>
@@ -121,6 +128,13 @@ $result = mysqli_query($con, $q);
       <td role="cell"><?php echo $rec['promotional_code']; ?></td>
       <td role="cell"><?php echo $rec['type']; ?></td>
       <td role="cell"><?php echo $rec['value']; ?></td>
+      <td role="cell"><?php echo $rec['limit_usage']; ?></td>
+      <td role="cell"><?php echo $rec['limit_usage_number_of_times']; ?></td>
+      <td role="cell"><?php echo $rec['start_date']; ?></td>
+      <td role="cell"><?php echo $rec['start_time']; ?></td>
+      <td role="cell"><?php echo $rec['limit_by_time']; ?></td>
+      <td role="cell"><?php echo $rec['end_date']; ?></td>
+      <td role="cell"><?php echo $rec['end_time']; ?></td>
       <td role="cell">
           
           <form method="post">

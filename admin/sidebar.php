@@ -24,6 +24,12 @@
                         <span>Manage Promotional codes</span>
                     </a>
                 </li>
+                <li>
+                    <a class="active" href="view_promotional_codes.php" <?php if($pagename=='view_promotional_codes.php') echo 'style="background:black !important;"'; ?>>
+                        <i class="fas fa-bullhorn"></i>
+                        <span>View Promotional codes</span>
+                    </a>
+                </li>
 				<li>
                     <a class="active" href="manage_orders.php" <?php if($pagename=='manage_orders.php') echo 'style="background:rgb(79,54,107) !important"'; ?>>
                         <i class="fas fa-tasks"></i>
