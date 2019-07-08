@@ -95,7 +95,7 @@
 
 							  <!-- Modal body -->
 							  <div class="modal-body">
-								<form action="operations.php" method="POST">
+								<form action="operations.php" method="POST" enctype="multipart/form-data">
 									<div class="form-group">
 										<label><i class="fa fa-upload"></i> Upload CSV</label>
 										<input type="file" name="csv" accept=".csv">

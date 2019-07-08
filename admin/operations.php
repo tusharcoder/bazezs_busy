@@ -500,7 +500,35 @@ SET orc = '".$full_name."' WHERE id=1;";
 	}
 
 	if (isset($_POST["upload_csv_results_file"])) {
-		# code...
+		# check for the file...
+		if (isset($_FILES['csv'])) {
+			# code...
+			$file_handle = fopen($_FILES["csv"]["tmp_name"], "r");
+			while ($data = fgetcsv($file_handle)) {
+				# code...
+				/*
+				getting the array object like this so insert one by one in the database
+										(
+					    [0] => Human
+					    [1] => OmegaÂ 
+					    [2] => human.png
+					    [3] => 9
+					)
+				*/
+				$result_type = $data[0];
+				$result_name = $data[1];
+				$result_image = $data[2];
+				$result_point = $data[3];
+				$q = "Select * from results where result_name = '$result_name' and result_type = '$result_type'";
+				$res_count = mysqli_query($con,$q);
+				if (!mysqli_num_rows($res_count)) {
+					# code...
+					$ins_q = "INSERT INTO results (result_name, result_type, result_image, result_point) values('$result_name','$result_type','$result_image',$result_point)";
+					mysqli_query($con, $ins_q); 
+				}
+			}
+			
+		}
 		$_SESSION["success_message"] = "Results bulk uploaded finished successfully";
 		header("location:admin_result.php");		
 	}
