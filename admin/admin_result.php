@@ -81,6 +81,14 @@
 					  <?php if (isset($_GET['e'])){
 							echo '<p style="text-align:center; color:red"><b>Email Already Exists!</b></p>';
 					  }?>
+					  <?php
+					  if (isset($_POST['delete'])) {
+					  	# code...
+					  	$id = $_POST['id'];
+					  	$q = "DELETE FROM results WHERE result_id = $id";
+					  	mysqli_query($con, $q);
+					  }
+					  ?>
 					  <table class="table" style="font-size:20px;" ui-jq="footable" ui-options='{
 							"paging": {
 							  "enabled": true
@@ -96,6 +104,7 @@
 								<th style="color:black">Result Name</th>
 								<th style="color:black">Total Points</th>
 								<th style="color:black">Edit</th>
+								<th style="color:black">Delete</th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -113,6 +122,15 @@
 								<td style="color:black;"><?php echo $row['result_point']; ?></td>
 								
 								<td><a data-toggle="modal" data-target="#edit<?=$row['result_id'];?>"><button class="btn btn-md btn-primary" style="background:#007bff!important;border:#007bff!important"><i class="fa fa-edit"></i> Edit</button></a></td>
+								<td>
+									<form method="POST" onsubmit="return confirm('Are you sure?')">
+										
+										<input type="hidden" name="id" value="<?php echo $row['result_id'];?>">
+									<a><button class="btn btn-md btn-primary" style="background:#007bff!important;border:#007bff!important" type="submit" name="delete"><i class="fa fa-trash"></i> Delete</button></a>
+
+									</form>
+
+								</td>
 									
 								<div class="modal" id="edit<?=$row['result_id'];?>">
 								  <div class="modal-dialog">
