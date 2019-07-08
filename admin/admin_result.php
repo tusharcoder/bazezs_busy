@@ -27,7 +27,9 @@
 		<section class="wrapper">
 			<div class="table-agile-info">
 				<div class="panel">
-					<button class="btn btn-primary" data-toggle="modal" data-target="#add_form" style="background:#007bff!important;border:#007bff!important;float:right">Add Result</button>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#add_form" style="background:#007bff!important;border:#007bff!important;float:right;margin-left: 1rem;">Add Result</button>
+					
+					<button class="btn btn-primary" data-toggle="modal" data-target="#add_form" style="background:#007bff!important;border:#007bff!important;float:right;">Bulk CSV</button>
 					
 						<div class="modal" id="add_form">
 						  <div class="modal-dialog">
