@@ -499,6 +499,12 @@ SET orc = '".$full_name."' WHERE id=1;";
 
 	}
 
+	if (isset($_POST["upload_csv_results_file"])) {
+		# code...
+		$_SESSION["success_message"] = "Results bulk uploaded finished successfully";
+		header("location:admin_result.php");		
+	}
+
 	
 ?>
 
