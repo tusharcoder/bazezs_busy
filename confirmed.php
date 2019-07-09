@@ -103,6 +103,7 @@ include "send_mail.php";
 								while ($random_row = mysqli_fetch_array($random_result)) {
 									$random_arr_name[] = $random_row['result_name'];
 									$random_arr_image[] = $random_row['result_image'];
+									mysqli_query($con,"INSERT INTO order_results (order_id, result_name, result_image, result_id) values('$order_id','".$random_row['result_name']."','".$random_row['result_name']."',".$random_row['result_id'].")");
 							?>
 									<tr>
 										<td><img src="icons/index-page/<?php echo $random_row['result_image'] ?>" class="img-circle" style="width:75px"></td>
