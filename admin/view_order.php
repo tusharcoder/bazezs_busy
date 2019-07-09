@@ -55,6 +55,10 @@
 						<td><?php echo date('d F Y',$order_row['order_time']) ?></td>
 						<th>Order Time</th>
 						<td><?php echo date('h:i A',$order_row['order_time']) ?></td>
+						<th>Order Amount</th>
+						<td><?php echo $order_row['order_amount']; ?></td>
+						<th>Order Transaction Status</th>
+						<td><?php echo $order_row['order_payment_success']==="1"?"Success":"Failed"; ?></td>
 					</tr>
 					<tr>
 						<th>Customer Name</th>
