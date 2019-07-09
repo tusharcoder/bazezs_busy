@@ -43,7 +43,30 @@
 		<section class="wrapper">
 			<div class="table-agile-info">
 				<div class="panel">
-					
+					<?php 
+					$q = "Select order_id from orders where order_id = (select min(order_id) from orders where order_id > '$order_id')";
+					$previous = mysqli_query($con,$q);
+					$previous = mysqli_fetch_array($previous);
+					?>
+				
+					<?php 
+					$q = "Select order_id from orders where order_id = (select max(order_id) from orders where order_id < '$order_id')";
+					$next = mysqli_query($con,$q);
+					$next = mysqli_fetch_array($next);
+					?>
+				<?php if ($previous["order_id"]){ ?>
+					<a href="view_order.php?id=<?php echo $previous["order_id"];?>" class="btn btn-primary">Previous</a>
+
+				<?php }else {?>
+					<a href="#" class="btn btn-secondry">Previous</a>
+				<?php } ?>
+				
+				<?php if ($next["order_id"]){ ?>
+				<a href="view_order.php?id=<?php echo $next["order_id"];?>" class="btn btn-primary" style="float: right;">Next</a>
+				<?php }else{ ?>
+					<a href="#" class="btn btn-secondry" style="float: right;">Next</a>
+				<?php } ?>
+				<hr>
 					<div class="panel-heading">
 					 <b>ORDER <?php echo $order_id ?></b>
 					</div><br>
@@ -133,6 +156,19 @@
 					<?php } ?>
 					</div>
 				<?php } ?>
+				<?php if ($previous["order_id"]){ ?>
+					<a href="view_order.php?id=<?php echo $previous["order_id"];?>" class="btn btn-primary">Previous</a>
+
+				<?php }else {?>
+					<a href="#" class="btn btn-secondry">Previous</a>
+				<?php } ?>
+				
+				<?php if ($next["order_id"]){ ?>
+				<a href="view_order.php?id=<?php echo $next["order_id"];?>" class="btn btn-primary" style="float: right;">Next</a>
+				<?php }else{ ?>
+					<a href="#" class="btn btn-secondry" style="float: right;">Next</a>
+				<?php } ?>
+				
 			</div>
 		</section>
 	</section>
