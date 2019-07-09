@@ -89,6 +89,19 @@
 					</tr>
 					<?php } ?>
 				</table>
+				<h3>Order Results</h3>
+				<table class="order-table">
+					<?php
+						$q = mysqli_query($con, "SELECT * FROM order_results WHERE order_id = '$order_id'");
+						while ($row = mysqli_fetch_array($q)) {
+					?>
+					<tr>
+										<td><img src="../icons/index-page/<?php echo $row['result_image'] ?>" class="img-circle" style="width:75px"></td>
+										
+										<td style="width:80%;"><b><?php echo $row['result_name']; ?></b></td>
+									</tr>
+					<?php } ?>
+				</table>
 				<?php if ($order_row['order_service_id']==2) { ?>
 					<br><br>
 					<div class="row">
