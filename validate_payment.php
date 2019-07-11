@@ -17,15 +17,21 @@ require_once('./database.php');
 
 \Stripe\Stripe::setApiKey($key);
 
-
+try{
 $charge = \Stripe\Charge::create([
   'amount' => $data["amount"],
   'currency' => $data["currency"],
   'source' => $data["source"],
 ]);
-
 $uq = "UPDATE orders set order_payment_success=1 where order_id='".$data["order_id"]."'";
 mysqli_query($con,$uq);
+}catch(Exception $e){
+	$uq = "UPDATE orders set order_payment_success=0 where order_id='".$data["order_id"]."'";
+	mysqli_query($con,$uq);
+	// exit();
+	header("location:payment.php?fail=1");
+	exit();
+}
 $q = "Select * from orders where order_id ='".$data["order_id"]."'";
 // echo $q;
 $res = mysqli_query($con,$q);
