@@ -167,13 +167,9 @@
 							</div>
 
 							<?php
-							echo 1;
 							$alipay_amt = 100*($price-$discount);
-							echo 2;
 							$alipay_cur = "usd";
-							echo 3;
 							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
-							echo 4;
 							//script for the ali pay
 							require_once('./stripe/stripe-php/init.php');
 							\Stripe\Stripe::setApiKey($key);
