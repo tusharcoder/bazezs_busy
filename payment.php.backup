@@ -165,42 +165,12 @@
 								<input type="radio" checked> <b>Pay by Stripe</b>
 								<img src="img/stripe-logo.png" height="20px" style="float:right">
 							</div>
-
-							<?php
-							echo 1;
-							$alipay_amt = 100*($price-$discount);
-							echo 2;
-							$alipay_cur = "usd";
-							echo 3;
-							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
-							echo 4;
-							//script for the ali pay
-							require_once('./stripe/stripe-php/init.php');
-							\Stripe\Stripe::setApiKey($key);
-
-							$alipay = \Stripe\Source::create([
-							  "type" => "alipay",
-							  "currency" => $alipay_cur,
-							  "amount"=>$alipay_amt,
-							  "owner" => [
-							    "email" => "test@test.com"
-							  ],
-							  "redirect"=>[
-							  	"return_url"=>$host."validate_payment.php?amount=".$alipay_amt."&currency=".$alipay_cur."&order_id=".$order_id
-							  ]
-							]);
-
-							?>
 							<div style="border:1px solid #ccc;border-bottom:2px solid rgb(180,219,158);padding:14px">
-								<input type="radio"  data-url="<?php echo $alipay["redirect"]["url"] ?>" name="" disabled> <b>Pay with Alipay</b>
+								<input type="radio"  name="" disabled> <b>Pay with Alipay</b>
 								<img src="img/ali-pay.png" height="18px" style="float:right">
 							</div>
 							
 							<br>
-							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
-								<img src="./icons/payment/alipay.jpeg">		
-							</a>
-							
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
