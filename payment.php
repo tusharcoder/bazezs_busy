@@ -161,10 +161,7 @@
 							<div class="form-group">
 							  <input type="hidden" class="form-control" name="user_ip" value="<?php echo getUserIpAddr();?>" required>
 							</div>
-							<div style="border:1px solid #ccc;padding:14px">
-								<input type="radio" checked> <b>Pay by Stripe</b>
-								<img src="img/stripe-logo.png" height="20px" style="float:right">
-							</div>
+							
 
 							<?php
 							$alipay_amt = 100*($price-$discount);
@@ -187,10 +184,7 @@
 							]);
 
 							?>
-							<div style="border:1px solid #ccc;border-bottom:2px solid rgb(180,219,158);padding:14px">
-								<input type="radio"  data-url="<?php echo $alipay["redirect"]["url"] ?>" name="" disabled> <b>Pay with Alipay</b>
-								<img src="img/ali-pay.png" height="18px" style="float:right">
-							</div>
+							
 							
 							<br>
 							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
