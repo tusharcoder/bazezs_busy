@@ -90,21 +90,21 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 				  <div class="col-md-8">
-					<div class="panel panel-default">
-						  <div class="panel-heading">
-						  <table class="table">
+					<div class="panel panel-default panel-edit">
+						  <div class="panel-heading panel-heading-edit">
+						  <table class="table table-edit">
 							<tr>
-								<td>Item Name</td>
-								<td style="float:right">Item Price</td>
+								<td><h5><strong>Checkout</strong></h5></td>
+								
 							</tr>
 						  </table>
 						  </div>
-						<div class="panel-body">
-							<table class="table">
+						<div class="panel-body panel-body-edit">
+							<table class="table table-edit grey-bot-border">
 								<tr>
 									<td>
 									<?php if($user_selection=='Human') { ?>
-										<img src="icons/index-page/human.png" class="img-responsive" width="60px" style="display: inline-block"> 
+										<!-- <img src="icons/index-page/human.png" class="img-responsive" width="60px" style="display: inline-block">  -->
 									<?php } else if($user_selection=='Orc') { ?>
 										<img src="icons/index-page/orc.png" class="img-responsive" width="60px" style="display: inline-block"> 
 									<?php } ?>
@@ -128,69 +128,83 @@
 										?>
 										<?php echo strtoupper($service_name)." ORDER"; ?> 
 									</td>
-									<td>
-										<p style="margin-top:20px;float:right">$<?php echo($price-$discount); ?></p>
-									</td>
+									<td align="right"><strong>$<?php echo($price-$discount); ?></strong></td>
 								</tr>
-							</table><hr/>
-							<table class="table">
+							</table>
+							<table class="table table-edit">
 								<tr>
-									<td style="float:right">Total: $<?php echo($price-$discount); ?></td>
+									<td><strong>Total</strong></td>
+									<td align="right"> <strong>$<?php echo($price-$discount); ?></strong></td>
 								</tr>
 							</table>
 						</div>
 					</div>
-					<div class="well">
-					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form" enctype="multipart/form-data">
+					<div class="well well-edit">
+					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form form-horizontal" enctype="multipart/form-data">
 						<input type="hidden" name="order_id" value="<?php echo $order_id?>">
 						<input type="hidden" name="order_service_id" value="<?php echo $order_service_id?>">
-						<div class="well">
+						
+							<h3 style="margin:50px 0 15px 0; font-size:20px;">SHIPPING AND BILLING ADDRESS</h3>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Name</label>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-name" name="user_name" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Email</label>
+							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Address</label>
+							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">City</label>
+							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Postal Code</label>
+							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Country</label>
+							  	<div class="col-sm-10">
+									  <select class="form-control">
+										  <option select="select">China</option>
+										  <option>Australia</option>
+										  <option>England</option>
+										  <option>USA</option>
+										  <option>Canada</option>
+										  <option>Others</option>
+									  </select>
+								  </div>
+							</div>
+							<div class="well">
 						<p style="text-align:right;color:rgb(82,126,199);cursor:pointer" onclick="myFunction()">Have a discount code? Click to enter it.</p>
+						
 							<p id="demo">
 						<?php if (isset($_GET['code'])){ ?>
 								<input type='text' name='promotional_code' value = "<?php echo ($_GET['code']); ?>" class='form-control'></p><?php }?>	
 						
 						
 					</div>
-							<div class="form-group">
-							  <input type="text" class="form-control" placeholder="Name" onkeyup="test()" id="user-name" name="user_name" required>
-							</div>
-							<div class="form-group">
-							  <input type="email" class="form-control"  placeholder="Email" onkeyup="test()" id="user-email" name="user_email" required>
-							</div>
+							
 							<div class="form-group">
 							  <input type="hidden" class="form-control" name="user_ip" value="<?php echo getUserIpAddr();?>" required>
 							</div>
-							
-
-							<?php
-							$alipay_amt = 100*($price-$discount);
-							$alipay_cur = "usd";
-							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
-							//script for the ali pay
-							require_once('./stripe/stripe-php/init.php');
-							\Stripe\Stripe::setApiKey($key);
-
-							$alipay = \Stripe\Source::create([
-							  "type" => "alipay",
-							  "currency" => $alipay_cur,
-							  "amount"=>$alipay_amt,
-							  "owner" => [
-							    "email" => "test@test.com"
-							  ],
-							  "redirect"=>[
-							  	"return_url"=>$host."validate_payment.php?amount=".$alipay_amt."&currency=".$alipay_cur."&order_id=".$order_id
-							  ]
-							]);
-
-							?>
-							
+							<div class="row grey-border">
+								<div class="col-sm-2"><img src="img/alipay-logo.png" /></div>
+								<div class="col-sm-2"><img src="img/master-visa.png" /></div>
+							</div>
+							<div style="border:1px solid #ccc;padding:14px">
+								<input type="radio" checked> <b>Pay by Stripe</b>
+								<img src="img/stripe-logo.png" height="20px" style="float:right">
+							</div>
+							<div style="border:1px solid #ccc;border-bottom:2px solid rgb(180,219,158);padding:14px">
+								<input type="radio"  name="" disabled> <b>Pay with Alipay</b>
+								<img src="img/ali-pay.png" height="18px" style="float:right">
+							</div>
 							
 							<br>
-							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
-								<img src="./icons/payment/alipay.jpeg">		
-							</a>
-							
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
