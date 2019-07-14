@@ -14,7 +14,7 @@ require('constant.php');
 	.label {margin: 2px 0;}
 	.field {margin: 0 0 20px 0;}	
 		.content {width: 960px;margin: 0 auto;}
-		h1, h2 {font-family:"Georgia", Times, serif;font-weight: normal;}
+		/* h1, h2 {font-family:"Georgia", Times, serif;font-weight: normal;} */
 		div#central {margin: 40px 0px 100px 0px;}
 		@media all and (min-width: 768px) and (max-width: 979px) {.content {width: 750px;}}
 		@media all and (max-width: 767px) {
@@ -24,15 +24,7 @@ require('constant.php');
 		}
 		body {font-family: 'Helvetica',Arial,sans-serif;background:#ffffff;margin: 0 auto;-webkit-font-smoothing: antialiased;  font-size: initial;line-height: 1.7em;}	
 		input, textarea {width:100%;padding: 15px;font-size:1em;border: 1px solid #A1A1A1;	}
-		button {
-			padding: 12px 60px;
-			background: #5BC6FF;
-			border: none;
-			color: rgb(40, 40, 40);
-			font-size:1em;
-			font-family: "Georgia", Times, serif;
-			cursor: pointer;	
-		}
+		
 		#message {  padding: 0px 40px 0px 0px; }
 		#mail-status {
 			padding: 12px 20px;
@@ -44,7 +36,7 @@ require('constant.php');
 		}
 	  .error{background-color: #F7902D;  margin-bottom: 40px;}
 	  .success{background-color: #48e0a4; }
-		.g-recaptcha {margin: 0 0 25px 0;}	  
+		
 	</style>
 	<script src='https://www.google.com/recaptcha/api.js'></script>	
 </head>
@@ -53,29 +45,48 @@ require('constant.php');
 
 <div id="central">
 	<div class="content">
-		<h1>Contact Form</h1>
+		<h1 style="margin:50px 0 35px 0; font-size:20px;"><strong>CONTACT US</strong></h1>
 		<div id="message">
-		<form id="frmContact" action="" method="POST" novalidate="novalidate" enctype="multipart/form-data">
-			<div class="label">Subject:</div>
-			<div class="field">
-				<input type="text" id="subject" name="subject" placeholder="Subject.." title="Please enter your name" class="required" aria-required="true" required>
+		<form id="frmContact" action="" method="POST" class="form-horizontal" novalidate="novalidate" enctype="multipart/form-data">
+		<div class="form-group">
+			<label class="font-normal lebel control-label col-sm-2">Subject</label>
+			<div class="col-sm-10">
+			<select class="form-control" id="subject">
+				<option value="Customer Service">Customer Service</option>
+				<option value="Request for review">Request for review</option>
+				<option value="Certificate Issue">Certificate Issue</option>
+			</select>
 			</div>
-			<div class="label">Email Address:</div>
-			<div class="field">			
-				<input type="text" id="email" name="email" placeholder="enter your email address here" title="Please enter your email address" class="required email" aria-required="true" required>
+		</div>
+		<div class="form-group">
+			<label class="font-normal lebel control-label col-sm-2">Email Address</label>
+			<div class="col-sm-10">
+				<input type="text" id="email" name="subject" placeholder="Your@email.com" title="Please enter your name" class="form-control" aria-required="true" required>
 			</div>
-			<div class="label">Attachment:</div>
-			<div class="field">			
-				<input type="file" name="attachment" id="attachment">
-				<!-- <input type="text" id="phone" name="phone" placeholder="enter your phone number here" title="Please enter your phone number" class="required phone" aria-required="true" required> -->
+		</div>
+		<div class="form-group">
+			<label class="font-normal lebel control-label col-sm-2">Attachment</label>
+			<div class="col-sm-10">
+				<input type="file" id="attachment" name="subject" placeholder="Your@email.com" lass="form-control">
 			</div>
-			<div class="label">Message:</div>
-			<div class="field">			
-				<textarea id="" name="message" placeholder="How can we help?"></textarea>			
+		</div>
+		<div class="form-group">
+			<label class="font-normal lebel control-label col-sm-2">Message</label>
+			<div class="col-sm-10">
+			<textarea id="" name="message" class="form-control" placeholder="How can we help?"></textarea>	
 			</div>
-			<div class="g-recaptcha" data-sitekey="<?php echo SITE_KEY; ?>"></div>			
+		</div>
+		<div class="form-group">
+			<label class="font-normal lebel control-label col-sm-2">Captcha</label>
+			<div class="col-sm-10 g-recaptcha" data-sitekey="<?php echo SITE_KEY; ?>"></div>		
+		</div>
+		<div class="form-group">
+			<label class="font-normal lebel control-label col-sm-2"></label>
+			<div class="col-sm-10 text-right"><button type="Submit" id="send-message" class="btn btn-primary">SEND</button></div>		
+		</div>
+
 			<div id="mail-status"></div>			
-			<button type="Submit" id="send-message" style="clear:both;">Send Message</button>
+			
 		</form>
 		<div id="loader-icon" style="display:none;"><img src="img/loader.gif" /></div>
 		</div>		
