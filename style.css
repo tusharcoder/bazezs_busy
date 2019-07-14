@@ -3700,7 +3700,46 @@ a.shipping-calculator-button:hover{
 }
 
 
-
+/* ====================== hemant classes begin here ======================== */
+.grey-border{
+    border:1px solid #ddd;
+    padding: 10px!important;
+}
+.grey-bot-border{
+    border-bottom:1px solid #ddd;
+}
+.table-edit{
+    margin: 0!important;
+}
+.table-edit > td{
+    vertical-align: middle!important;
+}
+.panel-edit{
+    border-top-color: #7cb5f5;
+    border-left:0;
+    border-right:0;
+    border-left:0;
+    border-radius: 0;
+    border-bottom: 0;
+    box-shadow: none;
+}
+.panel-heading-edit{
+    background-color: transparent!important;
+    padding: 20px 0 0 0;
+}
+.panel-body-edit{
+    padding: 0;
+}
+.well-edit{
+    background-color: transparent;
+    border:0!important;
+    box-shadow: none!important;
+    padding: 0!important;
+    min-height: auto!important;
+}
+.font-normal{
+    font-weight: normal;
+}
 
 
 
