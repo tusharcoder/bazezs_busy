@@ -17,7 +17,7 @@
                             <div class="mobile-menu clearfix visible-xs visible-sm">
                                 <nav id="mobile_dropdown">
                                     <ul>
-                                        <li><a href="#">contact</a></li>
+                                        <li><a href="contact.php">contact</a></li>
                                     </ul>
                                 </nav>
                             </div>                          
@@ -25,15 +25,15 @@
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
-                                <li class="hidden-xs">Contact</li>
+                                <li class="hidden-xs"><a href="contact.php">Contact</a></li>
                                 <li>
 									<div class="">
 									  <div class="">
 										<ul class="list-unstyled list-inline ct-topbar__list">
 										  <li class="ct-language" style="background:white; color:black;font-family:'Poppins', sans-serif; !important;cursor:pointer">Lang
 											<ul class="list-unstyled ct-language__dropdown">
-											  <li><a href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en" selected><img src="https://www.solodev.com/assets/google-translate/flag-usa.png" alt="USA"></a></li>
-											  <li><a href="#googtrans(en|zh-CN)" class="lang-es lang-select" data-lang="zh-CN"><img src="https://www.solodev.com/assets/google-translate/flag-china.png" alt="CHINA" style="padding-right:10px !important;"></a></li>
+                                            <li><a href="#googtrans(en|zh-CN)" class="lang-es lang-select" data-lang="zh-CN" selected><img src="https://www.solodev.com/assets/google-translate/flag-china.png" alt="CHINA"></a></li>  
+                                            <li><a href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en"><img src="https://www.solodev.com/assets/google-translate/flag-usa.png" alt="USA"></a></li>
 											</ul>
 										  </li>
 										</ul>
