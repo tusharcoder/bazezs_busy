@@ -209,8 +209,31 @@
 								<input type="radio"  name="" disabled> <b>Pay with Alipay</b>
 								<img src="img/ali-pay.png" height="18px" style="float:right">
 							</div>
+							<?php
+							$alipay_amt = 100*($price-$discount);
+							$alipay_cur = "usd";
+							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
+							//script for the ali pay
+							require_once('./stripe/stripe-php/init.php');
+							\Stripe\Stripe::setApiKey($key);
+							$alipay = \Stripe\Source::create([
+							  "type" => "alipay",
+							  "currency" => $alipay_cur,
+							  "amount"=>$alipay_amt,
+							  "owner" => [
+							    "email" => "test@test.com"
+							  ],
+							  "redirect"=>[
+							  	"return_url"=>$host."validate_payment.php?amount=".$alipay_amt."&currency=".$alipay_cur."&order_id=".$order_id
+							  ]
+							]);
+							?>
 							
 							<br>
+							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
+								<img src="./img/alipay-logo.png" width="200px">		
+							</a>
+
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
