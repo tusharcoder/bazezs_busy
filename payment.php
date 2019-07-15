@@ -231,7 +231,7 @@
 </body>
 <script>
   $(function() {
-    $(".stripe-button-el").replaceWith('<button type="submit" class="pay"><img src="./img/master-visa.png" width="81"></button>');
+    $(".stripe-button-el").replaceWith('<button type="submit" class="pay"><img src="./img/master-visa.png" width="200"></button>');
   });
 </script>
 <script>
