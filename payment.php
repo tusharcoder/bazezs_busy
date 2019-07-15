@@ -161,15 +161,15 @@
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Address</label>
-							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-address" name="user-address" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">City</label>
-							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-city" name="user-city" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Postal Code</label>
-							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-postal" name="user-postal" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Country</label>
