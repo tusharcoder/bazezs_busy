@@ -51,7 +51,7 @@ require('constant.php');
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Subject</label>
 			<div class="col-sm-10">
-			<select class="form-control" id="subject">
+			<select class="form-control conatct-txt" id="subject">
 				<option value="Customer Service">Customer Service</option>
 				<option value="Request for review">Request for review</option>
 				<option value="Certificate Issue">Certificate Issue</option>
@@ -61,19 +61,19 @@ require('constant.php');
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Email Address</label>
 			<div class="col-sm-10">
-				<input type="text" id="email" name="subject" placeholder="Your@email.com" title="Please enter your name" class="form-control" aria-required="true" required>
+				<input type="text" id="email" name="subject" placeholder="Your@email.com" title="Please enter your name" class="form-control conatct-txt" aria-required="true" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Attachment</label>
 			<div class="col-sm-10">
-				<input type="file" id="attachment" name="subject" placeholder="Your@email.com" lass="form-control">
+				<input type="file" id="attachment" name="subject"  class="form-control conatct-txt">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Message</label>
 			<div class="col-sm-10">
-			<textarea id="" name="message" class="form-control" placeholder="How can we help?"></textarea>	
+			<textarea id="" name="message" class="form-control conatct-txt" placeholder="How can we help?"></textarea>	
 			</div>
 		</div>
 		<div class="form-group">
@@ -82,7 +82,7 @@ require('constant.php');
 		</div>
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2"></label>
-			<div class="col-sm-10 text-right"><button type="Submit" id="send-message" class="btn btn-primary">SEND</button></div>		
+			<div class="col-sm-10 text-right"><button type="Submit" id="send-message" class="btn btn-primary btn-contact"><strong>SEND</strong></button></div>		
 		</div>
 
 			<div id="mail-status"></div>			
