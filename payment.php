@@ -48,7 +48,13 @@
 .table td, .table th {
     border: none !important;
 }
+
+.stripe-button-el{
+
+	background: url(img/master-visa.png);
+}
    </style>
+}
 </head>
 
 <body>
@@ -223,6 +229,11 @@
 	</div>
 	<?php include "footerlinks.php";?>
 </body>
+<script>
+  $(function() {
+    $(".stripe-button-el").replaceWith('<button type="submit" class="pay"><img src="./img/master-visa.png" width="81"></button>');
+  });
+</script>
 <script>
 	function test() {
         var user_name = document.getElementById("user-name");
