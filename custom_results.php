@@ -258,7 +258,7 @@
   {
       success: function(data) {
         if (data == "success") {
-        	alert("Review from expert requested successfully");
+        	window.location.replace("thank_you.php");
         }
       },
       error: function() {
