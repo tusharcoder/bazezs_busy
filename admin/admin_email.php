@@ -116,6 +116,13 @@
                         <div class="col-sm-6">
                             <input type="password" name="email_password" value="<?php echo $row['email_password']?>" class="form-control" required>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label"><b>Admin Email (at which want to receives the mail):</b></label>
+                        <div class="col-sm-6">
+                            <input type="email" name="admin_email" value="<?php echo $row['admin_email']?>" class="form-control" required>
+                        </div>
                     </div> 
 					 <div class="form-group row">
 						<div class="col-sm-2"></div>

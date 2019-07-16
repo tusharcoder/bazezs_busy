@@ -67,6 +67,7 @@ ini_set('display_errors', -1);
 			$email_authentication = $_POST['email_authentication'];
 			$email_username = $_POST['email_username'];
 			$email_password = $_POST['email_password'];
+			$admin_email = $_POST['admin_email'];
 
 			$l_email_authentication = strtolower($email_authentication);
 			if ($l_email_authentication == "no") {
@@ -79,7 +80,7 @@ ini_set('display_errors', -1);
 				$email_authentication = true;
 			}
 			
-			$stmt = mysqli_prepare($con, "UPDATE email_setting SET email_subject=?,  email_address=?, email_from_name=?, email_smtp_host=?, email_port=?,  email_username=?, email_password=?, email_encryption='$email_encryption', email_authentication='$email_authentication'");
+			$stmt = mysqli_prepare($con, "UPDATE email_setting SET email_subject=?,  email_address=?, email_from_name=?, email_smtp_host=?, email_port=?,  email_username=?, email_password=?, email_encryption='$email_encryption', email_authentication='$email_authentication', admin_email='$admin_email'");
 			mysqli_stmt_bind_param($stmt,'sssssss',$email_subject,$email_address,$email_from_name,$email_smtp_host,$email_port,$email_username,$email_password);
 			mysqli_stmt_execute($stmt);
 			header("location:admin_email.php");
