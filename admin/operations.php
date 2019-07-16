@@ -1,6 +1,6 @@
 <?php session_start();
 error_reporting(E_ALL);
-
+ini_set('display_errors', -1);
 ?>
 <?php
 	include "database.php";
@@ -187,15 +187,15 @@ error_reporting(E_ALL);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 		# new fields
-		$limit_usage =  function () use ($_POST){
+		function limit_usage_func(){
 			if (isset($_POST['limit_usage'])) {
-				# code...
-				return 1;
-			}else{
-				return 0;
-			}
-		};
-		$limit_usage = $limit_usage();
+							# code...
+							return 1;
+						}else{
+							return 0;
+						}
+		}
+		$limit_usage = limit_usage_func();
 
 		$limit_usage_number_of_times = 0;
 		if ($limit_usage) {
@@ -207,15 +207,15 @@ error_reporting(E_ALL);
 			
 		}
 
-		$limit_by_time = function () use ($_POST){
+		function limit_by_time_func(){
 			if (isset($_POST['limit_by_time'])) {
 				# code...
 				return 1;
 			}else{
 				return 0;
 			}
-		};
-		$limit_by_time = $limit_by_time();
+		}
+		$limit_by_time = limit_by_time_func();
 
 		$start_date = $_POST["start_date"];
 		$start_time = $_POST["start_time"];
@@ -257,7 +257,7 @@ error_reporting(E_ALL);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 		# new fields
-		$limit_usage =  function () use ($_POST){
+		function limit_usage_func(){
 			if (isset($_POST['limit_usage'])) {
 				# code...
 				return 1;
@@ -265,7 +265,7 @@ error_reporting(E_ALL);
 				return 0;
 			}
 		};
-		$limit_usage = $limit_usage();
+		$limit_usage = limit_usage_func();
 
 		$limit_usage_number_of_times = 0;
 		if ($limit_usage) {
@@ -278,7 +278,7 @@ error_reporting(E_ALL);
 			
 		}
 
-		$limit_by_time = function () use ($_POST){
+		function limit_by_time_func (){
 			if (isset($_POST['limit_by_time'])) {
 				# code...
 				return 1;
@@ -286,7 +286,7 @@ error_reporting(E_ALL);
 				return 0;
 			}
 		};
-		$limit_by_time = $limit_by_time();
+		$limit_by_time = limit_by_time_func();
 
 		$start_date = $_POST["start_date"];
 		$start_time = $_POST["start_time"];
