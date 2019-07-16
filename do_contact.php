@@ -71,10 +71,11 @@ require('constant.php');
 
 	// attachment
 	if (isset($_FILES['attachment'])) {
-
-		move_uploaded_file($_FILES['attachment']["tmp_name"],$_FILES['attachment']["name"]);
-		$mail->addAttachment($_FILES['attachment']["name"]);
-
+		try{
+			move_uploaded_file($_FILES['attachment']["tmp_name"],"/tmp/".$_FILES['attachment']["name"]);
+			$mail->addAttachment("/tmp/".$_FILES['attachment']["name"]);
+			}catch(Exception $e){
+		}
 	}
 
 	 

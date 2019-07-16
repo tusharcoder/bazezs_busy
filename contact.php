@@ -51,7 +51,7 @@ require('constant.php');
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Subject</label>
 			<div class="col-sm-10">
-			<select class="form-control conatct-txt" id="subject">
+			<select class="form-control conatct-txt" id="subject" name="subject">
 				<option value="Customer Service">Customer Service</option>
 				<option value="Request for review">Request for review</option>
 				<option value="Certificate Issue">Certificate Issue</option>
@@ -61,13 +61,13 @@ require('constant.php');
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Email Address</label>
 			<div class="col-sm-10">
-				<input type="text" id="email" name="subject" placeholder="Your@email.com" title="Please enter your name" class="form-control conatct-txt" aria-required="true" required>
+				<input type="text" id="email" name="email" placeholder="Your@email.com" title="Please enter your name" class="form-control conatct-txt" aria-required="true" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="font-normal lebel control-label col-sm-2">Attachment</label>
 			<div class="col-sm-10">
-				<input type="file" id="attachment" name="subject"  class="form-control conatct-txt">
+				<input type="file" id="attachment" name="attachment"  class="form-control conatct-txt">
 			</div>
 		</div>
 		<div class="form-group">
