@@ -53,7 +53,11 @@
 
 	background: url(img/master-visa.png);
 }
+.selected_payment_option{
+	border: 3px solid red;
+}
    </style>
+}
 }
 </head>
 
@@ -197,16 +201,16 @@
 							<div class="form-group">
 							  <input type="hidden" class="form-control" name="user_ip" value="<?php echo getUserIpAddr();?>" required>
 							</div>
-							<div class="row grey-border">
+							<!-- <div class="row grey-border">
 								<div class="col-sm-2"><img src="img/alipay-logo.png" /></div>
 								<div class="col-sm-2"><img src="img/master-visa.png" /></div>
-							</div>
+							</div> -->
 							<div style="border:1px solid #ccc;padding:14px">
-								<input type="radio" checked> <b>Pay by Stripe</b>
+								<input type="radio" value="stripe" checked name="payment_option" id="stripe_radio"> <label for="stripe_radio">Pay by Stripe</label>
 								<img src="img/stripe-logo.png" height="20px" style="float:right">
 							</div>
 							<div style="border:1px solid #ccc;border-bottom:2px solid rgb(180,219,158);padding:14px">
-								<input type="radio"  name="" disabled> <b>Pay with Alipay</b>
+								<input type="radio" value="alipay" name="payment_option" id="alipay_radio"> <label for="alipay_radio">Pay with Alipay</label>
 								<img src="img/ali-pay.png" height="18px" style="float:right">
 							</div>
 							<?php
@@ -231,7 +235,7 @@
 							
 							<br>
 							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
-								<img src="./img/alipay-logo.png" width="200px">		
+								<img src="./img/alipay-logo.png" width="200px" id="alipay_payment_option">		
 							</a>
 
 							<script
@@ -254,7 +258,7 @@
 </body>
 <script>
   $(function() {
-    $(".stripe-button-el").replaceWith('<button type="submit" class="pay"><img src="./img/master-visa.png" width="200"></button>');
+    $(".stripe-button-el").replaceWith('<button type="submit" class="pay"><img src="./img/master-visa.png" width="200" id="stripe_payment_option"></button>');
   });
 </script>
 <script>
@@ -315,6 +319,20 @@ $(document).ready(function(){
 		uri = updateQueryStringParameter(uri,"code",value);
 		window.location.href = uri
 	}).bind(this);
-})
+});
+
+$(document).ready(function(){
+	$("input[name=payment_option]").on("change", function(){
+		var val = $(this).val();
+		if (val == "alipay") {
+			$("#stripe_payment_option").removeClass("selected_payment_option");
+			$("#alipay_payment_option").addClass("selected_payment_option");
+		}
+		if (val == "stripe") {
+			$("#alipay_payment_option").removeClass("selected_payment_option");
+			$("#stripe_payment_option").addClass("selected_payment_option");
+		}
+	});
+});
 </script>
 </html>
