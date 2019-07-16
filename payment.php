@@ -385,7 +385,19 @@ function myFunction() {
 		var value = $(this).val();
 		var uri = window.location.href;
 		uri = updateQueryStringParameter(uri,"code",value);
-		window.location.href = uri
+	var user_name = $("input[name=user_name]").val()
+	uri = updateQueryStringParameter(uri,"user_name",user_name);
+	var user_email = $("input[name=user_email]").val()
+	uri = updateQueryStringParameter(uri,"user_email",user_email);
+	var user_city = $("input[name=user-city]").val();
+	uri = updateQueryStringParameter(uri,"user-city",user_city);
+	var user_postal = $("input[name=user-postal]").val();
+	uri = updateQueryStringParameter(uri,"user-postal",user_postal);
+	var user_country = $("select[name=user-country]").val();
+	uri = updateQueryStringParameter(uri,"user-country",user_country);
+	var user_address = $("input[name=user-address]").val();
+	uri = updateQueryStringParameter(uri,"user-address",user_address);
+	window.location.href = uri;
 	}).bind(this);
 }
 
@@ -411,7 +423,6 @@ $(document).ready(function(){
 		var value = $(this).val();
 		var uri = window.location.href;
 		uri = updateQueryStringParameter(uri,"code",value);
-		window.location.href = uri;
 	var user_name = $("input[name=user_name]").val()
 	uri = updateQueryStringParameter(uri,"user_name",user_name);
 	var user_email = $("input[name=user_email]").val()
@@ -424,7 +435,7 @@ $(document).ready(function(){
 	uri = updateQueryStringParameter(uri,"user-country",user_country);
 	var user_address = $("input[name=user-address]").val();
 	uri = updateQueryStringParameter(uri,"user-address",user_address);
-	window.location.href = uri
+	window.location.href = uri;
 	}).bind(this);
 });
 
