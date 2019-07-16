@@ -155,35 +155,83 @@
 							<h3 style="margin:50px 0 15px 0; font-size:20px;">SHIPPING AND BILLING ADDRESS</h3>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Name</label>
-							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-name" name="user_name" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-name" name="user_name" value="<?php if (isset($_REQUEST["user_name"])){ 
+					  		echo $_REQUEST["user_name"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Email</label>
-							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" required></div>
+							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" value="<?php if (isset($_REQUEST["user_email"])){ 
+					  		echo $_REQUEST["user_email"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Address</label>
-							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-address" name="user-address" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-address" name="user-address" value="<?php if (isset($_REQUEST["user-address"])){ 
+					  		echo $_REQUEST["user-address"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">City</label>
-							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-city" name="user-city" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-city" name="user-city" value="<?php if (isset($_REQUEST["user-city"])){ 
+					  		echo $_REQUEST["user-city"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
 							</div>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Postal Code</label>
-							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-postal" name="user-postal" required></div>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-postal" name="user-postal" value="<?php if (isset($_REQUEST["user-postal"])){ 
+					  		echo $_REQUEST["user-postal"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
 							</div>
 							<button id="submit-hidden" type="submit" style="display: none"></button>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Country</label>
 							  	<div class="col-sm-10">
 									  <select class="form-control" name="user-country">
-										  <option select="select">China</option>
-										  <option>Australia</option>
-										  <option>England</option>
-										  <option>USA</option>
-										  <option>Canada</option>
-										  <option>Others</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Australia"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>China</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Australia"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>Australia</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "England"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>England</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "USA"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>USA</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Canada"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>Canada</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Others"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>Others</option>
 									  </select>
 								  </div>
 							</div>
@@ -230,16 +278,16 @@
 							</script>
 					  </form>
 					  <form method="POST" action="do_alipay_payment.php" id="ali_pay_form">
-					  	<input type="hidden" name="user_name" id="user_name" value="<?php if (isset($_POST["user_name"])){ 
-					  		echo $_POST["user_name"]; ?>
+					  	<input type="hidden" name="user_name" id="user_name" value="<?php if (isset($_REQUEST["user_name"])){ 
+					  		echo $_REQUEST["user_name"]; ?>
 					  		
 					  	<?php }else{
 					  		echo "";
 
 					  	} ?>">
 					  	<input type="hidden" name="user_email" id="user_email" value="
-<?php if (isset($_POST["user_email"])){ 
-					  		echo $_POST["user_email"]; ?>
+<?php if (isset($_REQUEST["user_email"])){ 
+					  		echo $_REQUEST["user_email"]; ?>
 					  		
 					  	<?php }else{
 					  		echo "";
@@ -247,30 +295,30 @@
 					  	} ?>
 					  	">
 					  	<input type="hidden" name="user-address" id="user_address" value="
-<?php if (isset($_POST["user-address"])){ 
-					  		echo $_POST["user-address"]; ?>
+<?php if (isset($_REQUEST["user-address"])){ 
+					  		echo $_REQUEST["user-address"]; ?>
 					  		
 					  	<?php }else{
 					  		echo "";
 
 					  	} ?>
 					  	">
-					  	<input type="hidden" name="user-city" id="user_city" value="<?php if (isset($_POST["user-city"])){ 
-					  		echo $_POST["user-city"]; ?>
+					  	<input type="hidden" name="user-city" id="user_city" value="<?php if (isset($_REQUEST["user-city"])){ 
+					  		echo $_REQUEST["user-city"]; ?>
 					  		
 					  	<?php }else{
 					  		echo "";
 
 					  	} ?>">
-					  	<input type="hidden" name="user-postal" id="user_postal" value="<?php if (isset($_POST["user-postal"])){ 
-					  		echo $_POST["user-postal"]; ?>
+					  	<input type="hidden" name="user-postal" id="user_postal" value="<?php if (isset($_REQUEST["user-postal"])){ 
+					  		echo $_REQUEST["user-postal"]; ?>
 					  		
 					  	<?php }else{
 					  		echo "";
 
 					  	} ?>">
-					  	<input type="hidden" name="user-country" id="user_country" value="<?php if (isset($_POST["user-country"])){ 
-					  		echo $_POST["user-country"]; ?>
+					  	<input type="hidden" name="user-country" id="user_country" value="<?php if (isset($_REQUEST["user-country"])){ 
+					  		echo $_REQUEST["user-country"]; ?>
 					  		
 					  	<?php }else{
 					  		echo "China";
@@ -363,7 +411,20 @@ $(document).ready(function(){
 		var value = $(this).val();
 		var uri = window.location.href;
 		uri = updateQueryStringParameter(uri,"code",value);
-		window.location.href = uri
+		window.location.href = uri;
+	var user_name = $("input[name=user_name]").val()
+	uri = updateQueryStringParameter(uri,"user_name",user_name);
+	var user_email = $("input[name=user_email]").val()
+	uri = updateQueryStringParameter(uri,"user_email",user_email);
+	var user_city = $("input[name=user-city]").val();
+	uri = updateQueryStringParameter(uri,"user-city",user_city);
+	var user_postal = $("input[name=user-postal]").val();
+	uri = updateQueryStringParameter(uri,"user-postal",user_postal);
+	var user_country = $("select[name=user-country]").val();
+	uri = updateQueryStringParameter(uri,"user-country",user_country);
+	var user_address = $("input[name=user-address]").val();
+	uri = updateQueryStringParameter(uri,"user-address",user_address);
+	window.location.href = uri
 	}).bind(this);
 });
 
