@@ -121,7 +121,8 @@ require('constant.php');
 					$("#mail-status").attr("class","error");				
 				} else if(response.type == "message"){
 					$('#send-message').hide();
-					$("#mail-status").attr("class","success");							
+					// $("#mail-status").attr("class","success");
+					window.location.replace("thank_you.php");							
 				}
 				$("#mail-status").html(response.text);	
 				},
