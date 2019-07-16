@@ -52,7 +52,7 @@ require('constant.php');
 			<label class="font-normal lebel control-label col-sm-2">Subject</label>
 			<div class="col-sm-10">
 			<select class="form-control conatct-txt" id="subject" name="subject">
-				<option value="Customer Service">Customer Service</option>
+				<option value="Customer Service" selected>Customer Service</option>
 				<option value="Request for review">Request for review</option>
 				<option value="Certificate Issue">Certificate Issue</option>
 			</select>
@@ -102,7 +102,7 @@ require('constant.php');
 			$('#loader-icon').show();
 			var data = new FormData();
 			data.append("attachment",$('input[name=attachment]')[0].files[0]);
-			data.append("subject",$('input[name="subject"]').val());
+			data.append("subject",$('select[name="subject"]').children("option:selected").val());
 			data.append("email",$('input[name="email"]').val());
 			data.append("g-recaptcha-response",$('input[name=attachment]')[0].files[0]);
 			data.append("message",$('textarea[name="message"]').val());
