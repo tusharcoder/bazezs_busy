@@ -148,7 +148,7 @@
 						</div>
 					</div>
 					<div class="well well-edit">
-					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form form-horizontal" enctype="multipart/form-data">
+					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form form-horizontal" id="master_form" enctype="multipart/form-data">
 						<input type="hidden" name="order_id" value="<?php echo $order_id?>">
 						<input type="hidden" name="order_service_id" value="<?php echo $order_service_id?>">
 						
@@ -173,6 +173,7 @@
 								<label class="font-normal lebel control-label col-sm-2">Postal Code</label>
 							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-postal" name="user-postal" required></div>
 							</div>
+							<button id="submit-hidden" type="submit" style="display: none"></button>
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Country</label>
 							  	<div class="col-sm-10">
@@ -407,8 +408,16 @@ $(document).ready(function(){
 	//initialize the alipay payment
 
 	$("#init_alipay_payment").on("click", function(){
+		
+  if (!$("#master_form")[0].checkValidity()) {
+    // If the form is invalid, submit it. The form won't actually submit;
+    // this will just cause the browser to display the native HTML5 error messages.
+    $("#master_form").find("#submit-hidden").click();
+  }else{
+
 		$("#ali_pay_form").submit();
-	})
+	}
+	});
 });
 
 </script>
