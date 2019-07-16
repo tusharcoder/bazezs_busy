@@ -8,10 +8,14 @@ pk_test_RNA5nOQFGUbJ72i9HOgCmgTw004S1ar5Pn
 Secret key:
 sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE
 */
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+// ini_set('display_errors',1);
+// error_reporting(E_ALL);
 $key = "sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
 $data = $_GET;
+foreach ($data as $data_key => $value) {
+	# code...
+	$data[trim($data_key)]=trim($value);
+}
 require_once('./stripe/stripe-php/init.php');
 require_once('./database.php');
 

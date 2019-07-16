@@ -57,8 +57,6 @@
 	border: 3px solid red;
 }
    </style>
-}
-}
 </head>
 
 <body>
@@ -178,7 +176,7 @@
 							<div class="form-group">
 								<label class="font-normal lebel control-label col-sm-2">Country</label>
 							  	<div class="col-sm-10">
-									  <select class="form-control">
+									  <select class="form-control" name="user-country">
 										  <option select="select">China</option>
 										  <option>Australia</option>
 										  <option>England</option>
@@ -213,28 +211,10 @@
 								<input type="radio" value="alipay" name="payment_option" id="alipay_radio"> <label for="alipay_radio">Pay with Alipay</label>
 								<img src="img/ali-pay.png" height="18px" style="float:right">
 							</div>
-							<?php
-							$alipay_amt = 100*($price-$discount);
-							$alipay_cur = "usd";
-							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
-							//script for the ali pay
-							require_once('./stripe/stripe-php/init.php');
-							\Stripe\Stripe::setApiKey($key);
-							$alipay = \Stripe\Source::create([
-							  "type" => "alipay",
-							  "currency" => $alipay_cur,
-							  "amount"=>$alipay_amt,
-							  "owner" => [
-							    "email" => "test@test.com"
-							  ],
-							  "redirect"=>[
-							  	"return_url"=>$host."validate_payment.php?amount=".$alipay_amt."&currency=".$alipay_cur."&order_id=".$order_id
-							  ]
-							]);
-							?>
+							<!--  -->
 							
 							<br>
-							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
+							<a href="#" id="init_alipay_payment">
 								<img src="./img/alipay-logo.png" width="200px" id="alipay_payment_option">		
 							</a>
 
@@ -247,6 +227,71 @@
 								data-image="images/logo/uniqlo.png"
 								data-locale="auto">
 							</script>
+					  </form>
+					  <form method="POST" action="do_alipay_payment.php" id="ali_pay_form">
+					  	<input type="hidden" name="user_name" id="user_name" value="<?php if (isset($_POST["user_name"])){ 
+					  		echo $_POST["user_name"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>">
+					  	<input type="hidden" name="user_email" id="user_email" value="
+<?php if (isset($_POST["user_email"])){ 
+					  		echo $_POST["user_email"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>
+					  	">
+					  	<input type="hidden" name="user-address" id="user_address" value="
+<?php if (isset($_POST["user-address"])){ 
+					  		echo $_POST["user-address"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>
+					  	">
+					  	<input type="hidden" name="user-city" id="user_city" value="<?php if (isset($_POST["user-city"])){ 
+					  		echo $_POST["user-city"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>">
+					  	<input type="hidden" name="user-postal" id="user_postal" value="<?php if (isset($_POST["user-postal"])){ 
+					  		echo $_POST["user-postal"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>">
+					  	<input type="hidden" name="user-country" id="user_country" value="<?php if (isset($_POST["user-country"])){ 
+					  		echo $_POST["user-country"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "China";
+
+					  	} ?>">
+					  		<input type="hidden" name="price"  value="<?php if (isset($price)){ 
+					  		echo $price; ?>
+					  		
+					  	<?php } ?>">
+
+					  	<input type="hidden" name="discount"  value="<?php if (isset($discount)){ 
+					  		echo $discount; ?>
+					  		
+					  	<?php } ?>">
+					  	<input type="hidden" name="host"  value="<?php if (isset($host)){ 
+					  		echo $host;?>
+					  	<?php } ?>">
+					  	<input type="hidden" name="order_id"  value="<?php if (isset($order_id)){ 
+					  		echo $order_id; ?>
+					  		
+					  	<?php } ?>">
+					  	<button type="submit" id="submit_alipay_form"></button>
 					  </form>
 					  <br>
 					</div>
@@ -333,6 +378,38 @@ $(document).ready(function(){
 			$("#stripe_payment_option").addClass("selected_payment_option");
 		}
 	});
+
+	$("input[name=user_name]").on("change", function(){
+		var val = $(this).val();
+		$("#user_name").val(val);
+	});
+	$("input[name=user_email]").on("change", function(){
+		var val = $(this).val();
+		$("#user_email").val(val);
+	});
+	$("input[name=user-city]").on("change", function(){
+		var val = $(this).val();
+		$("#user_city").val(val);
+	});
+	$("input[name=user-postal]").on("change", function(){
+		var val = $(this).val();
+		$("#user_postal").val(val);
+	});
+	$("select[name=user-country]").on("change", function(){
+		var val = $(this).val();
+		// alert(val);
+		$("#user_country").val(val);
+	});
+	$("input[name=user-address]").on("change", function(){
+		var val = $(this).val();
+		$("#user_address").val(val);
+	});
+	//initialize the alipay payment
+
+	$("#init_alipay_payment").on("click", function(){
+		$("#ali_pay_form").submit();
+	})
 });
+
 </script>
 </html>
