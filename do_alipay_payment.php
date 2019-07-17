@@ -21,6 +21,9 @@ $q = "Select * from stripe_key";
 $res = mysqli_query($con,$q);
 $data = mysqli_fetch_array($res);
 
+#updating the email and the name of the user
+mysqli_query($con, "Update orders set user_email='".$email."', user_name='".$name."' where order_id='".$order_id."'");
+
 if($data["is_live"] == 0){
 	$key = "sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
 }else{
