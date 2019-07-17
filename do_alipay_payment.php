@@ -2,8 +2,9 @@
 /*
 set up the post data from the form
 */
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+require_once("get_payment_keys.php");
 
 $name = trim($_POST["user_name"]); 
 $email = trim($_POST["user_email"]); 
@@ -16,9 +17,20 @@ $discount = trim($_POST['discount']);
 $host = trim($_POST['host']);
 $order_id = trim($_POST['order_id']);
 
+$q = "Select * from stripe_key";
+$res = mysqli_query($con,$q);
+$data = mysqli_fetch_array($res);
+
+if($data["is_live"] == 0){
+	$key = "sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
+}else{
+							$key=$p_k["spk"];
+}
+// aud, cad, eur, gbp, hkd, jpy, nzd, sgd, usd
+// only aud works
 $alipay_amt = 100*((float)$price-(float)$discount);
-							$alipay_cur = "usd";
-							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
+							$alipay_cur = "aud";
+							// $key=$p_k["spk"];
 							//script for the ali pay
 							require_once('./stripe/stripe-php/init.php');
 							\Stripe\Stripe::setApiKey($key);
@@ -31,7 +43,7 @@ $alipay_amt = 100*((float)$price-(float)$discount);
 							      "line1" => $address,
 							      "city" => $city,
 							      "postal_code" => $postal,
-							      "country" => $country],
+							      "country" => strtolower($country)],
     							"name"=> $name,
     							"email" => $email
 							  ],

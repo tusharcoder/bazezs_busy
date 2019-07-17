@@ -3,6 +3,7 @@
 	include "database.php";
 	include "functions.php";
 	include "get_discount.php";
+	require_once("get_payment_keys.php");
 	$order_id = 0;
 	if(isset($_SESSION['order_id'])){
 		$order_id = strval($_SESSION['order_id']);
@@ -267,9 +268,10 @@
 								<img src="./img/alipay-logo.png" width="200px" id="alipay_payment_option">		
 							</a>
 
+							
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
+								data-key="<?php echo $p_k["spk"];?>"
 								data-amount="<?php echo(100*($price-$discount));?>"
 								data-name="UNIQLO"
 								data-description="Pay Now"
