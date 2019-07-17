@@ -43,8 +43,18 @@
 			$stripe_live_publisher_key = $_POST['stripe_live_publisher_key'];
 			$stripe_live_secret_key = $_POST['stripe_live_secret_key'];
 			$change_price = $_POST['change_price'];
+			$is_live = 0;
+			if (isset($_POST["is_live"])) {
+				$is_live = $_POST['is_live'];
+				if($is_live == "on"){
+					$is_live = 1;
+				}else{
+					$is_live = 0;
+				}
+			}
 			
-			$stmt = mysqli_prepare($con, "UPDATE stripe_key SET stripe_test_publisher_key =?, stripe_test_secret_key=?, stripe_live_publisher_key=?, stripe_live_secret_key=?, change_price='$change_price'");
+			
+			$stmt = mysqli_prepare($con, "UPDATE stripe_key SET stripe_test_publisher_key =?, stripe_test_secret_key=?, stripe_live_publisher_key=?, stripe_live_secret_key=?, change_price='$change_price',is_live='$is_live'");
 			mysqli_stmt_bind_param($stmt,'ssss',$stripe_test_publisher_key,$stripe_test_secret_key,$stripe_live_publisher_key,$stripe_live_secret_key);
 			mysqli_stmt_execute($stmt);
 			header("location:admin_stripe.php");

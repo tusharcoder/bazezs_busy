@@ -18,6 +18,7 @@
 		$stripe_live_publisher_key = $row['stripe_live_publisher_key'];
 		$stripe_live_secret_key = $row['stripe_live_secret_key'];
 		$change_price = $row['change_price'];
+    $is_live = $row['is_live'];
 	?>
 
     <style type="text/css">
@@ -111,7 +112,10 @@ input:checked + .slider:before {
                         <div class="col-sm-6">
                         <!-- Rounded switch -->
 <label class="switch">
-  <input type="checkbox">
+  <input type="checkbox" <?php if ($is_live) { ?>
+
+    checked="checked"
+  <?php } ?> name="is_live">
   <span class="slider round"></span>
 </label>
                         </div>
