@@ -107,7 +107,7 @@ input:checked + .slider:before {
                 <form action="operations.php" method="POST">
                     <div class="form-group row">
                         <div class="col-sm-1"></div>
-                        <label class="col-sm-3 control-label"><b>Test Secret Key:</b></label>
+                        <label class="col-sm-3 control-label"><b>Live Payment Gateway:</b></label>
                         <div class="col-sm-6">
                         <!-- Rounded switch -->
 <label class="switch">
@@ -118,7 +118,7 @@ input:checked + .slider:before {
                     </div>
                     <div class="form-group row">
 						<div class="col-sm-1"></div>
-                        <label class="col-sm-3 control-label"><b>Live Payment Gateway:</b></label>
+                        <label class="col-sm-3 control-label"><b>Test Secret Key:</b></label>
                         <div class="col-sm-6">
                             <input type="text" name="stripe_test_secret_key" class="form-control" value="<?php echo $stripe_test_secret_key?>" required>
                         </div>
