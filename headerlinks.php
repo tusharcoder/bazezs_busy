@@ -60,7 +60,7 @@
 }
 .ct-language__dropdown li{
 	background: #222;
-	padding: 5px;
+	padding: 5px 0;
 }
 .ct-language__dropdown li a{
 	display: block;

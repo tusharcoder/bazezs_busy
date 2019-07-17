@@ -38,5 +38,13 @@
 	  location.reload();
 
 	});
+
+	function disableScreen() {
+    // creates <div class="overlay"></div> and 
+    // adds it to the DOM
+    var div= document.createElement("div");
+    div.className += "overlay";
+    document.body.appendChild(div);
+}
   </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

@@ -55,6 +55,18 @@ include "send_mail.php";
 	  border:2px solid black;
 	  cursor:pointer;
 }
+
+.overlay {
+    background-color:#EFEFEF;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    opacity: .5; /* in FireFox */ 
+    filter: alpha(opacity=50); /* in IE */
+}
    </style>
 </head>
 
@@ -243,12 +255,14 @@ include "send_mail.php";
 	<script type="text/javascript">
 		var order_id = '<?php echo $order_id; ?>';
 		$("#request_review").on("click",function(){
+			disableScreen();
+
 				$.ajax(
   'request_review_from_expert.php?order_id='+order_id,
   {
       success: function(data) {
         if (data == "success") {
-        	alert("Review from expert requested successfully");
+        	window.location.replace("thank_you.php");
         }
       },
       error: function() {

@@ -1,7 +1,11 @@
 <?php
+
+// error_reporting(E_ALL);
+// ini_set('display_errors', "On");
 if($_POST)
 {
 require('constant.php');
+require('database.php');
     
  
     $subject		= filter_var($_POST["subject"], FILTER_SANITIZE_STRING);
@@ -42,15 +46,18 @@ require('constant.php');
 				die($output);				
 		  }	
 	}
+
+	$admin_email = "Select admin_email from email_setting where email_setting_id = 1";
+	$admin_email = mysqli_query($con,$admin_email);	
+	$admin_email = mysqli_fetch_array($admin_email)["admin_email"];	
+	$toEmail = $admin_email;
 	
-	$toEmail = "tamyworld@gmail.com";
 	$mailHeaders = "From: User<" . $user_email . ">\r\n";
 
 	$mailBody = "User Email: " . $user_email . "\n";
 
 	$mailBody .= "Message: " . $content . "\n";
 
-	$admin_email = "tamyworld@gmail.com";
 
 	require_once 'PHPMailer/PHPMailerAutoload.php';
 
@@ -67,14 +74,15 @@ require('constant.php');
 
 
 	$mail->setFrom('tamyworld@gmail.com', 'Admin');
-	$mail->addAddress($admin_email, $user_email);
+	$mail->addAddress($toEmail);
 
 	// attachment
 	if (isset($_FILES['attachment'])) {
-
-		move_uploaded_file($_FILES['attachment']["tmp_name"],$_FILES['attachment']["name"]);
-		$mail->addAttachment($_FILES['attachment']["name"]);
-
+		try{
+			move_uploaded_file($_FILES['attachment']["tmp_name"],"/tmp/".$_FILES['attachment']["name"]);
+			$mail->addAttachment("/tmp/".$_FILES['attachment']["name"]);
+			}catch(Exception $e){
+		}
 	}
 
 	 

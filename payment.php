@@ -3,6 +3,7 @@
 	include "database.php";
 	include "functions.php";
 	include "get_discount.php";
+	require_once("get_payment_keys.php");
 	$order_id = 0;
 	if(isset($_SESSION['order_id'])){
 		$order_id = strval($_SESSION['order_id']);
@@ -48,6 +49,14 @@
 .table td, .table th {
     border: none !important;
 }
+
+.stripe-button-el{
+
+	background: url(img/master-visa.png);
+}
+.selected_payment_option{
+	border: 3px solid red;
+}
    </style>
 </head>
 
@@ -90,21 +99,21 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 				  <div class="col-md-8">
-					<div class="panel panel-default">
-						  <div class="panel-heading">
-						  <table class="table">
+					<div class="panel panel-default panel-edit">
+						  <div class="panel-heading panel-heading-edit">
+						  <table class="table table-edit">
 							<tr>
-								<td>Item Name</td>
-								<td style="float:right">Item Price</td>
+								<td><h5><strong>Checkout</strong></h5></td>
+								
 							</tr>
 						  </table>
 						  </div>
-						<div class="panel-body">
-							<table class="table">
+						<div class="panel-body panel-body-edit">
+							<table class="table table-edit grey-bot-border">
 								<tr>
 									<td>
 									<?php if($user_selection=='Human') { ?>
-										<img src="icons/index-page/human.png" class="img-responsive" width="60px" style="display: inline-block"> 
+										<!-- <img src="icons/index-page/human.png" class="img-responsive" width="60px" style="display: inline-block">  -->
 									<?php } else if($user_selection=='Orc') { ?>
 										<img src="icons/index-page/orc.png" class="img-responsive" width="60px" style="display: inline-block"> 
 									<?php } ?>
@@ -128,78 +137,212 @@
 										?>
 										<?php echo strtoupper($service_name)." ORDER"; ?> 
 									</td>
-									<td>
-										<p style="margin-top:20px;float:right">$<?php echo($price-$discount); ?></p>
-									</td>
+									<td align="right"><strong>$<?php echo($price-$discount); ?></strong></td>
 								</tr>
-							</table><hr/>
-							<table class="table">
+							</table>
+							<table class="table table-edit">
 								<tr>
-									<td style="float:right">Total: $<?php echo($price-$discount); ?></td>
+									<td><strong>Total</strong></td>
+									<td align="right"> <strong>$<?php echo($price-$discount); ?></strong></td>
 								</tr>
 							</table>
 						</div>
 					</div>
-					<div class="well">
-					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form" enctype="multipart/form-data">
+					<div class="well well-edit">
+					  <form action="pro.php" method="post" class="creditly-card-form agileinfo_form form-horizontal" id="master_form" enctype="multipart/form-data">
 						<input type="hidden" name="order_id" value="<?php echo $order_id?>">
 						<input type="hidden" name="order_service_id" value="<?php echo $order_service_id?>">
-						<div class="well">
+						
+							<h3 style="margin:50px 0 15px 0; font-size:20px;">SHIPPING AND BILLING ADDRESS</h3>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Name</label>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-name" name="user_name" value="<?php if (isset($_REQUEST["user_name"])){ 
+					  		echo $_REQUEST["user_name"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Email</label>
+							  	<div class="col-sm-10"><input type="email" class="form-control" onkeyup="test()" id="user-email" name="user_email" value="<?php if (isset($_REQUEST["user_email"])){ 
+					  		echo $_REQUEST["user_email"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Address</label>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-address" name="user-address" value="<?php if (isset($_REQUEST["user-address"])){ 
+					  		echo $_REQUEST["user-address"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">City</label>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-city" name="user-city" value="<?php if (isset($_REQUEST["user-city"])){ 
+					  		echo $_REQUEST["user-city"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
+							</div>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Postal Code</label>
+							  	<div class="col-sm-10"><input type="text" class="form-control" onkeyup="test()" id="user-postal" name="user-postal" value="<?php if (isset($_REQUEST["user-postal"])){ 
+					  		echo $_REQUEST["user-postal"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>" required></div>
+							</div>
+							<button id="submit-hidden" type="submit" style="display: none"></button>
+							<div class="form-group">
+								<label class="font-normal lebel control-label col-sm-2">Country</label>
+							  	<div class="col-sm-10">
+									  <select class="form-control" name="user-country">
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Australia"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>China</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Australia"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>Australia</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "England"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>England</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "USA"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>USA</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Canada"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>Canada</option>
+										  <option <?php if (isset($_REQUEST["user-country"]) && $_REQUEST["user-country"] == "Others"){ 
+					  		 ?>
+					  		selected="selected"
+					  	<?php }?>>Others</option>
+									  </select>
+								  </div>
+							</div>
+							<div class="well">
 						<p style="text-align:right;color:rgb(82,126,199);cursor:pointer" onclick="myFunction()">Have a discount code? Click to enter it.</p>
+						
 							<p id="demo">
 						<?php if (isset($_GET['code'])){ ?>
 								<input type='text' name='promotional_code' value = "<?php echo ($_GET['code']); ?>" class='form-control'></p><?php }?>	
 						
 						
 					</div>
-							<div class="form-group">
-							  <input type="text" class="form-control" placeholder="Name" onkeyup="test()" id="user-name" name="user_name" required>
-							</div>
-							<div class="form-group">
-							  <input type="email" class="form-control"  placeholder="Email" onkeyup="test()" id="user-email" name="user_email" required>
-							</div>
+							
 							<div class="form-group">
 							  <input type="hidden" class="form-control" name="user_ip" value="<?php echo getUserIpAddr();?>" required>
 							</div>
-							
-
-							<?php
-							$alipay_amt = 100*($price-$discount);
-							$alipay_cur = "usd";
-							$key="sk_test_FKKYZjA38qrbVsmqImWG07uu00hBEmQunE";
-							//script for the ali pay
-							require_once('./stripe/stripe-php/init.php');
-							\Stripe\Stripe::setApiKey($key);
-
-							$alipay = \Stripe\Source::create([
-							  "type" => "alipay",
-							  "currency" => $alipay_cur,
-							  "amount"=>$alipay_amt,
-							  "owner" => [
-							    "email" => "test@test.com"
-							  ],
-							  "redirect"=>[
-							  	"return_url"=>$host."validate_payment.php?amount=".$alipay_amt."&currency=".$alipay_cur."&order_id=".$order_id
-							  ]
-							]);
-
-							?>
-							
+							<!-- <div class="row grey-border">
+								<div class="col-sm-2"><img src="img/alipay-logo.png" /></div>
+								<div class="col-sm-2"><img src="img/master-visa.png" /></div>
+							</div> -->
+							<div style="border:1px solid #ccc;padding:14px">
+								<input type="radio" value="stripe" checked name="payment_option" id="stripe_radio"> <label for="stripe_radio">Pay by Stripe</label>
+								<img src="img/stripe-logo.png" height="20px" style="float:right">
+							</div>
+							<div style="border:1px solid #ccc;border-bottom:2px solid rgb(180,219,158);padding:14px">
+								<input type="radio" value="alipay" name="payment_option" id="alipay_radio"> <label for="alipay_radio">Pay with Alipay</label>
+								<img src="img/ali-pay.png" height="18px" style="float:right">
+							</div>
+							<!--  -->
 							
 							<br>
-							<a href="<?php echo $alipay["redirect"]["url"]; ?>">
-								<img src="./icons/payment/alipay.jpeg">		
+							<a href="#" id="init_alipay_payment">
+								<img src="./img/alipay-logo.png" width="200px" id="alipay_payment_option">		
 							</a>
+
 							
 							<script
 								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-								data-key="pk_test_dNtkFiJDmxGBJo8RTAivVvak00NSjJ1Nph"
+								data-key="<?php echo $p_k["spk"];?>"
 								data-amount="<?php echo(100*($price-$discount));?>"
 								data-name="UNIQLO"
 								data-description="Pay Now"
 								data-image="images/logo/uniqlo.png"
 								data-locale="auto">
 							</script>
+					  </form>
+					  <form method="POST" action="do_alipay_payment.php" id="ali_pay_form">
+					  	<input type="hidden" name="user_name" id="user_name" value="<?php if (isset($_REQUEST["user_name"])){ 
+					  		echo $_REQUEST["user_name"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>">
+					  	<input type="hidden" name="user_email" id="user_email" value="
+<?php if (isset($_REQUEST["user_email"])){ 
+					  		echo $_REQUEST["user_email"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>
+					  	">
+					  	<input type="hidden" name="user-address" id="user_address" value="
+<?php if (isset($_REQUEST["user-address"])){ 
+					  		echo $_REQUEST["user-address"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>
+					  	">
+					  	<input type="hidden" name="user-city" id="user_city" value="<?php if (isset($_REQUEST["user-city"])){ 
+					  		echo $_REQUEST["user-city"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>">
+					  	<input type="hidden" name="user-postal" id="user_postal" value="<?php if (isset($_REQUEST["user-postal"])){ 
+					  		echo $_REQUEST["user-postal"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "";
+
+					  	} ?>">
+					  	<input type="hidden" name="user-country" id="user_country" value="<?php if (isset($_REQUEST["user-country"])){ 
+					  		echo $_REQUEST["user-country"]; ?>
+					  		
+					  	<?php }else{
+					  		echo "China";
+
+					  	} ?>">
+					  		<input type="hidden" name="price"  value="<?php if (isset($price)){ 
+					  		echo $price; ?>
+					  		
+					  	<?php } ?>">
+
+					  	<input type="hidden" name="discount"  value="<?php if (isset($discount)){ 
+					  		echo $discount; ?>
+					  		
+					  	<?php } ?>">
+					  	<input type="hidden" name="host"  value="<?php if (isset($host)){ 
+					  		echo $host;?>
+					  	<?php } ?>">
+					  	<input type="hidden" name="order_id"  value="<?php if (isset($order_id)){ 
+					  		echo $order_id; ?>
+					  		
+					  	<?php } ?>">
+					  	<button type="submit" id="submit_alipay_form"></button>
 					  </form>
 					  <br>
 					</div>
@@ -209,6 +352,11 @@
 	</div>
 	<?php include "footerlinks.php";?>
 </body>
+<script>
+  $(function() {
+    $(".stripe-button-el").replaceWith('<button type="submit" class="pay"><img src="./img/master-visa.png" width="200" id="stripe_payment_option"></button>');
+  });
+</script>
 <script>
 	function test() {
         var user_name = document.getElementById("user-name");
@@ -239,7 +387,19 @@ function myFunction() {
 		var value = $(this).val();
 		var uri = window.location.href;
 		uri = updateQueryStringParameter(uri,"code",value);
-		window.location.href = uri
+	var user_name = $("input[name=user_name]").val()
+	uri = updateQueryStringParameter(uri,"user_name",user_name);
+	var user_email = $("input[name=user_email]").val()
+	uri = updateQueryStringParameter(uri,"user_email",user_email);
+	var user_city = $("input[name=user-city]").val();
+	uri = updateQueryStringParameter(uri,"user-city",user_city);
+	var user_postal = $("input[name=user-postal]").val();
+	uri = updateQueryStringParameter(uri,"user-postal",user_postal);
+	var user_country = $("select[name=user-country]").val();
+	uri = updateQueryStringParameter(uri,"user-country",user_country);
+	var user_address = $("input[name=user-address]").val();
+	uri = updateQueryStringParameter(uri,"user-address",user_address);
+	window.location.href = uri;
 	}).bind(this);
 }
 
@@ -265,8 +425,74 @@ $(document).ready(function(){
 		var value = $(this).val();
 		var uri = window.location.href;
 		uri = updateQueryStringParameter(uri,"code",value);
-		window.location.href = uri
+	var user_name = $("input[name=user_name]").val()
+	uri = updateQueryStringParameter(uri,"user_name",user_name);
+	var user_email = $("input[name=user_email]").val()
+	uri = updateQueryStringParameter(uri,"user_email",user_email);
+	var user_city = $("input[name=user-city]").val();
+	uri = updateQueryStringParameter(uri,"user-city",user_city);
+	var user_postal = $("input[name=user-postal]").val();
+	uri = updateQueryStringParameter(uri,"user-postal",user_postal);
+	var user_country = $("select[name=user-country]").val();
+	uri = updateQueryStringParameter(uri,"user-country",user_country);
+	var user_address = $("input[name=user-address]").val();
+	uri = updateQueryStringParameter(uri,"user-address",user_address);
+	window.location.href = uri;
 	}).bind(this);
-})
+});
+
+$(document).ready(function(){
+	$("input[name=payment_option]").on("change", function(){
+		var val = $(this).val();
+		if (val == "alipay") {
+			$("#stripe_payment_option").removeClass("selected_payment_option");
+			$("#alipay_payment_option").addClass("selected_payment_option");
+		}
+		if (val == "stripe") {
+			$("#alipay_payment_option").removeClass("selected_payment_option");
+			$("#stripe_payment_option").addClass("selected_payment_option");
+		}
+	});
+
+	$("input[name=user_name]").on("change", function(){
+		var val = $(this).val();
+		$("#user_name").val(val);
+	});
+	$("input[name=user_email]").on("change", function(){
+		var val = $(this).val();
+		$("#user_email").val(val);
+	});
+	$("input[name=user-city]").on("change", function(){
+		var val = $(this).val();
+		$("#user_city").val(val);
+	});
+	$("input[name=user-postal]").on("change", function(){
+		var val = $(this).val();
+		$("#user_postal").val(val);
+	});
+	$("select[name=user-country]").on("change", function(){
+		var val = $(this).val();
+		// alert(val);
+		$("#user_country").val(val);
+	});
+	$("input[name=user-address]").on("change", function(){
+		var val = $(this).val();
+		$("#user_address").val(val);
+	});
+	//initialize the alipay payment
+
+	$("#init_alipay_payment").on("click", function(){
+		
+  if (!$("#master_form")[0].checkValidity()) {
+    // If the form is invalid, submit it. The form won't actually submit;
+    // this will just cause the browser to display the native HTML5 error messages.
+    $("#master_form").find("#submit-hidden").click();
+  }else{
+
+		$("#ali_pay_form").submit();
+	}
+	});
+});
+
 </script>
 </html>

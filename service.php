@@ -1,6 +1,9 @@
+<!-- <?php //ini_set('display_errors', -1); ?> -->
 <?php session_start();?>
 <?php
 	$order_id = 0;
+	// var_dump($_SESSION['order_id']);
+	// exit();
 	if(isset($_SESSION['order_id'])){
 		$order_id = strval($_SESSION['order_id']);
 	} else {

@@ -1,6 +1,4 @@
 <?php session_start();
-error_reporting(E_ALL);
-
 ?>
 <?php
 	include "database.php";
@@ -45,8 +43,18 @@ error_reporting(E_ALL);
 			$stripe_live_publisher_key = $_POST['stripe_live_publisher_key'];
 			$stripe_live_secret_key = $_POST['stripe_live_secret_key'];
 			$change_price = $_POST['change_price'];
+			$is_live = 0;
+			if (isset($_POST["is_live"])) {
+				$is_live = $_POST['is_live'];
+				if($is_live == "on"){
+					$is_live = 1;
+				}else{
+					$is_live = 0;
+				}
+			}
 			
-			$stmt = mysqli_prepare($con, "UPDATE stripe_key SET stripe_test_publisher_key =?, stripe_test_secret_key=?, stripe_live_publisher_key=?, stripe_live_secret_key=?, change_price='$change_price'");
+			
+			$stmt = mysqli_prepare($con, "UPDATE stripe_key SET stripe_test_publisher_key =?, stripe_test_secret_key=?, stripe_live_publisher_key=?, stripe_live_secret_key=?, change_price='$change_price',is_live='$is_live'");
 			mysqli_stmt_bind_param($stmt,'ssss',$stripe_test_publisher_key,$stripe_test_secret_key,$stripe_live_publisher_key,$stripe_live_secret_key);
 			mysqli_stmt_execute($stmt);
 			header("location:admin_stripe.php");
@@ -67,6 +75,7 @@ error_reporting(E_ALL);
 			$email_authentication = $_POST['email_authentication'];
 			$email_username = $_POST['email_username'];
 			$email_password = $_POST['email_password'];
+			$admin_email = $_POST['admin_email'];
 
 			$l_email_authentication = strtolower($email_authentication);
 			if ($l_email_authentication == "no") {
@@ -79,7 +88,7 @@ error_reporting(E_ALL);
 				$email_authentication = true;
 			}
 			
-			$stmt = mysqli_prepare($con, "UPDATE email_setting SET email_subject=?,  email_address=?, email_from_name=?, email_smtp_host=?, email_port=?,  email_username=?, email_password=?, email_encryption='$email_encryption', email_authentication='$email_authentication'");
+			$stmt = mysqli_prepare($con, "UPDATE email_setting SET email_subject=?,  email_address=?, email_from_name=?, email_smtp_host=?, email_port=?,  email_username=?, email_password=?, email_encryption='$email_encryption', email_authentication='$email_authentication', admin_email='$admin_email'");
 			mysqli_stmt_bind_param($stmt,'sssssss',$email_subject,$email_address,$email_from_name,$email_smtp_host,$email_port,$email_username,$email_password);
 			mysqli_stmt_execute($stmt);
 			header("location:admin_email.php");
@@ -187,15 +196,15 @@ error_reporting(E_ALL);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 		# new fields
-		$limit_usage =  function () use ($_POST){
+		function limit_usage_func(){
 			if (isset($_POST['limit_usage'])) {
-				# code...
-				return 1;
-			}else{
-				return 0;
-			}
-		};
-		$limit_usage = $limit_usage();
+							# code...
+							return 1;
+						}else{
+							return 0;
+						}
+		}
+		$limit_usage = limit_usage_func();
 
 		$limit_usage_number_of_times = 0;
 		if ($limit_usage) {
@@ -207,15 +216,15 @@ error_reporting(E_ALL);
 			
 		}
 
-		$limit_by_time = function () use ($_POST){
+		function limit_by_time_func(){
 			if (isset($_POST['limit_by_time'])) {
 				# code...
 				return 1;
 			}else{
 				return 0;
 			}
-		};
-		$limit_by_time = $limit_by_time();
+		}
+		$limit_by_time = limit_by_time_func();
 
 		$start_date = $_POST["start_date"];
 		$start_time = $_POST["start_time"];
@@ -257,7 +266,7 @@ error_reporting(E_ALL);
 		$value = $_POST['value'];
 		$type = $_POST['type'];
 		# new fields
-		$limit_usage =  function () use ($_POST){
+		function limit_usage_func(){
 			if (isset($_POST['limit_usage'])) {
 				# code...
 				return 1;
@@ -265,7 +274,7 @@ error_reporting(E_ALL);
 				return 0;
 			}
 		};
-		$limit_usage = $limit_usage();
+		$limit_usage = limit_usage_func();
 
 		$limit_usage_number_of_times = 0;
 		if ($limit_usage) {
@@ -278,7 +287,7 @@ error_reporting(E_ALL);
 			
 		}
 
-		$limit_by_time = function () use ($_POST){
+		function limit_by_time_func (){
 			if (isset($_POST['limit_by_time'])) {
 				# code...
 				return 1;
@@ -286,7 +295,7 @@ error_reporting(E_ALL);
 				return 0;
 			}
 		};
-		$limit_by_time = $limit_by_time();
+		$limit_by_time = limit_by_time_func();
 
 		$start_date = $_POST["start_date"];
 		$start_time = $_POST["start_time"];
